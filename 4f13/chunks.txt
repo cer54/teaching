@@ -1,0 +1,139 @@
+-- Part I --
+1) Linear in the parameters regression
+   - making predictions, concept of a model
+   - least squares fit
+   - requires linear algebra
+   - limitation: overfitting
+
+2) Likelihood and the concept of noise
+   - Gaussian iid noise
+   - Maximum likelihood fitting
+   - Equivalence to least squares
+   - Motivation of inference with multiple hypotetheses
+
+3*) Probability basics
+    - Medical example
+    - Joint, conditional and marginal probabilities
+    - The two rules of probability: sum and product
+    - Bayes rule
+
+4) Bayesian inference and prediction with finite regression models
+   - Likelihood and prior
+   - Posterior and predictive distribution
+
+5) Marginal likelihood
+   - Bayesian model selection
+   - MCMC based explanation of how the marginal likelihood works
+   - Average the likelihood over the prior: example with polynomials
+
+6) Distributions over parameters and over functions
+   [Grab slide 16, 21 and 22 from lect0102]
+   - Motivation: representation of multiple hypotheses
+   - Concept of prior over functions and over parameters
+   - Inference
+   - Priors over functions are priors over long vectors
+
+7) Gaussian process priors
+   - From finite multi-variate Gaussians to Gaussian processes
+   - GP definition
+   - Conditional generation and joint generation
+   - Marginal and conditional
+   - In pictures: prior and posterior
+   - In algebra: prior and posterior
+   - An analytic marginal likelihood, and some intuition
+   - Desirable properties of priors over functions (idea: write down
+     the "telescopic" products of conditionals expansion, and realize
+     that you cannot really do anything without marginalization)
+
+8) Linear in the parameters models are particular case GPs
+   - From infinite linear models to GPs: the Gaussian RBF case
+   - From infinite linear models to GPs: the infinite NN case (w/o proof)
+   - Splines are GPs
+   - What's your prior (polynomials are a bad idea)
+
+9) Practical model selection with GPs
+   - Evidence: optimize or integrate out?
+   - A variety of covariance functions and how to compose new ones
+     (products, sums of cov funs, g(x)k(x,x')g(x'), etc)
+   - Walk through mauna loa fit example
+
+10) The gpml toolbox
+
+-- Part II --
+
+11) Ranking: motivation and tennis example
+    - Competition in sports and games (TrueSkill problem, match making)
+    - Tennis: the ATP ranking system explained
+    - Shortcomings: what does one need to make actual predictions?
+      (who wins?)
+
+12) The TrueSkill ranking model
+    - Change: get rid of variable 's' (difference of skills)
+    - Generative model with known skills
+    - The likelihood in pictures and equations
+    - Priors on skills
+    - Predictive distribution in closed analytical form
+    - Graphical representation wiht a factor graph for the generative model
+    - Question: in generative model factor graph the weights are not connected
+      		to each other via common factors, however, the posterior over
+		weights does not factorize. What?
+
+13*) Factor graphs and graphical models
+     - Motivation
+     - Various types of graphical models
+     - Factor graphs to represent structured probabilistic models
+     - Message passing algorithms for inference
+
+14) Approximate inference with EP on the full graph
+    - Schedule on the full graph
+    - EP approximation
+    - Moments of truncated Gaussians
+    - A detailed program view in 6 steps
+
+15*) Gibbs sampling
+
+16) Gibbs sampling inference applied to TrueSkill
+    - Gibbs sampling applied to True Skill, be super-explicit about
+      sampling from p(w,t|y) and ignoring samples from t as a way to marginalize 
+      over it. Alternate between sampling from p(t|w,y) and p(w|t,y) = p(w|t).
+
+-- Part III --
+
+17*) Discrete distributions over binary variables (tossing coins)
+     - Philosophical discussion about coins and priors
+     - Distributions on probabilities
+     - Bernoulli, binomial, Beta
+     - Sequences of throws: difference between discrete distribution
+       		    	    and Binomial distribution
+     - Bayes rule for discrete-Beta models
+
+18) Models of text
+    - Problem setting: how to model documents?
+    - Example: NIPS corpus
+    - Power laws on word frequencies...
+    - Word frequencies is the maximum likelihood solution
+
+19) A Bayesian model of text
+    - Posterior distributions over the probability simplex
+    - Dirichlet distributions
+
+20) Bayesian mixture of multinomials
+
+21) LDA
+
+= Improvements =
+
+* Finite linear in the parameters probabilistic inference part:
+- Be explicit about penalized ML, aka maximum a posteriori.
+
+* GP part: 
+- Be more careful about "sampling functions." It's possible
+to sample a finite collection of function values, and one can
+condition on those to obtain a narrower posterior. But it's important
+to realize that there exist an infinite number of functions that share
+this common subset of function values.
+
+* Tennis exercise: subtract 0.5 instead of 1 from PP matrix.
+
+* How do the exercises fit in the coursera view of the course?
+  
