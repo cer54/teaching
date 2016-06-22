@@ -3,7 +3,7 @@
    - making predictions, concept of a model
    - least squares fit
    - requires linear algebra
-   - limitations: underfitting and overfitting
+   - limitation: overfitting
 
 2) Likelihood and the concept of noise
    - Gaussian iid noise
