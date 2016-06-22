@@ -1,4 +1,3 @@
-= Chunking =
 -- Part I --
 1) Linear in the parameters regression
    - making predictions, concept of a model
