@@ -11,7 +11,7 @@
 course is broken down into a number of <em>chunks</em>, which are
 detailed in this page. The goal of this organisation is to help
 students to be able to identify and find material. Chunks are designed
-to be short, and fairly self contained, and clearly labeled with
+to be concise, and fairly self contained, and clearly labeled with
 content, prerequisites and relationships to other chunks.</p> 
 
 <p>The entire course falls naturally in three parts, <a
@@ -22,27 +22,36 @@ ranking</a> and <a href="#text">text modeling</a>.
 <h2><a name"gp"></a>Part I: Supervised non-parametric probabilistic
 inference using Gaussian processes</h2>
 
+<p>In a nutshell, part I is concerned with...</p>
+
 <ol>
+<li>Modeling data
+<ul>
+  <li>goals of building a model</li>
+  <li>requirements for good models</li>
+</ul>
+</li>
+
 <li><a href="linear in the parameters regression.pdf">Linear in
   the parameters regression</a>
   <ul>
   <li>making predictions, concept of a model</li>
-  <li>least squares fit</li>
+  <li>least squares fit, and the Normal equations</li>
   <li>requires linear algebra</li>
-  <li>limitations: underfitting and overfitting</li>
+  <li>model complexity: underfitting and overfitting</li>
   </ul>
 </li>
 
-<li>Likelihood and the concept of noise
+<li><a href="likelihood and noise.pdf">Likelihood and the concept of noise</a>
 <ul>
-  <li>Gaussian iid noise</li>
+  <li>Gaussian independent and identically distributed (iid) noise</li>
   <li>Maximum likelihood fitting</li>
   <li>Equivalence to least squares</li>
-  <li>Motivation of inference with multiple hypotetheses</li>
+  <li>Motivation of inference with multiple hypothesis</li>
 </ul>
 </li>
 
-<li>Probability basics
+<li><a href="basic probability.pdf">Probability basics</a>
 <ul>
   <li>Medical example</li>
   <li>Joint, conditional and marginal probabilities</li>
@@ -54,9 +63,21 @@ inference using Gaussian processes</h2>
 <li>Bayesian inference and prediction with finite regression models
 <ul>
   <li>Likelihood and prior</li>
-  <li>Posterior and predictive distribution</li>
-  </ul>
+  <li>Posterior and predictive distribution, pictorially</li>
+  <li>Posterior algebra</li>
+</ul>
 </li>
+
+<li>Background: <a href="gaussian and matrix equations.pdf">Some useful
+Gaussian and Matrix equations</a>
+<ul>
+  <li>matrix inversion lemma</li>
+  <li>mean and variance of Gaussian</li>
+  <li>mean and variance of projection of Gaussian</li>
+  <li>marginal and conditional of Gaussian</li>
+  <li>products of Gaussians</li>
+</ul>
+</li> 
 
 <li>Marginal likelihood
 <ul>
@@ -76,12 +97,17 @@ inference using Gaussian processes</h2>
 </ul>
 </li>
 
-<li>Gaussian process priors
+<li>Gaussian process
 <ul>
   <li>From finite multi-variate Gaussians to Gaussian processes</li>
   <li>GP definition</li>
   <li>Conditional generation and joint generation</li>
   <li>Marginal and conditional</li>
+</ul>
+</li>
+
+<li>Gaussian processes and data
+<ul>
   <li>In pictures: prior and posterior</li>
   <li>In algebra: prior and posterior</li>
   <li>An analytic marginal likelihood, and some intuition</li>
@@ -100,12 +126,36 @@ inference using Gaussian processes</h2>
 </ul>
 </li>
 
+<li>Gaussian process hyperparameters
+<ul>
+  <li>using hyper parameters to specify priors</li>
+  <li>automatic relevance determination (ARD)</li>
+  <li>how to fit hyperparameters</li>
+</ul>
+</li>
+
+<li>Occam's Razor and Gaussian processes
+<ul>
+  <li>Occam's Razor and the marginal likelihood</li>
+  <li>why doesn't the GP overfit</li>
+</ul>
+</li>
+
+<li>covariance functions
+<ul>
+  <li>Stationary covariance functions, squared exponential, rational
+  quadratic, Mat&eacute;rn covariance function</li>
+  <li>polynomial covariance function</li>
+  <li>periodic covariance</li>
+  <li>neural network covariance function</li>
+</ul>
+</li>
+
 <li>Practical model selection with GPs
 <ul>
-  <li>Evidence: optimize or integrate out?</li>
-  <li>A variety of covariance functions and how to compose new ones</li>
+  <li>A variety of covariance functions and how to compose new ones
      (products, sums of cov funs, g(x)k(x,x')g(x'), etc)</li>
-  <li>Walk through mauna loa fit example</li>
+  <li>Evidence: optimize or integrate out?</li>
 </ul>
 </li>
 
@@ -116,7 +166,7 @@ inference using Gaussian processes</h2>
 
 <h2><a name="rank"></a>Part II: Ranking</h2>
 
-<ol start="11">
+<ol start="17">
 <li>Ranking: motivation and tennis example
 <ul>
   <li>Competition in sports and games (TrueSkill problem, match making)</li>
@@ -174,7 +224,7 @@ inference using Gaussian processes</h2>
 
 <h2><a name="text"></a>Part III: Modeling text</h2>
 
-<ol start="17">
+<ol start="33">
 <li>Discrete distributions over binary variables (tossing coins)
 <ul>
   <li>Philosophical discussion about coins and priors</li>
@@ -202,6 +252,10 @@ inference using Gaussian processes</h2>
 </li>
 
 <li>Bayesian mixture of multinomials
+</li>
+
+<li><a href="expectation maximization.pdf">The Expectation
+Maximization (EM) algoritm</a>
 </li>
 
 <li>LDA

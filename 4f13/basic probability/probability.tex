@@ -1,0 +1,174 @@
+\input{../style.tex}
+
+\title{Probability basics}
+\author{Carl Edward Rasmussen}
+\date{June 23rd, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Key Concepts}
+
+\begin{itemize}
+\item probability basics
+\begin{itemize}
+\item Example: Medical diagnosis
+\item joint, conditional and marginal probabilities
+\item the two rules of probability: sum and product rules
+\item Bayes rule
+\end{itemize}
+\item Bayesian inference and prediction with finite regression models
+\begin{itemize}
+\item likelihood and prior
+\item posterior and predictive distribution
+\end{itemize}
+\item the marginal likelihood
+\begin{itemize}
+\item Bayesian model selection
+\item Example: How Bayes avoids overfitting
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Medical inference (diagnosis)}
+
+Breast cancer facts:
+\begin{itemize}
+\item $1\%$ of scanned women have breast cancer
+\item $80\%$ of women with breast cancer get positive mammography scans
+\item $9.6\%$ of women without breast cancer also get positive
+  mammography scans
+\end{itemize}
+
+{\bf Question:} A woman gets a scan, and it is positive; what is the probability that
+she has breast cancer?
+
+\begin{enumerate}
+\item less than $1\%$
+\item around $10\%$
+\item around $90\%$
+\item more than $99\%$
+\end{enumerate}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Medical inference}
+
+Breast cancer facts:
+\begin{itemize}
+\item $1\%$ of scanned women have breast cancer
+\item $80\%$ of women with breast cancer get positive mammography scans
+\item $9.6\%$ of women without breast cancer also get positive
+  mammography scans
+\end{itemize}
+
+Define: $C$ = presence of breast cancer; $\bar{C}$ = no breast cancer. \\
+$M$ = scan is positive; $\bar{M}$ = scan is negative.
+
+The probability of cancer for scanned women is $p(C) = 1\%$
+
+If there is cancer, the probability of a positive mammography
+is $p(M|C) = 80\%$
+
+If there is no cancer, we still have $p(M|\bar{C}) = 9.6\%$
+
+The question is what is $p(C|M)$?
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Medical inference}
+
+What is $p(C|M)$?
+
+Consider 10000 subjects of screening
+\begin{itemize}
+\item $p(C) = 1\%$, therefore 100 of them have cancer, of which
+\begin{itemize}
+\item $p(M|C) = 80\%$, therefore 80 get a positive mammography
+\item 20 get a negative mammography
+\end{itemize}
+\item $p(\bar{C}) = 99\%$, therefore 9900 of them do not have cancer, of which
+\begin{itemize}
+\item $p(M|\bar{C}) = 9.6\%$, therefore 950 get a positive mammography
+\item 8950 get a  negative mammography
+\end{itemize}
+\end{itemize}
+
+\begin{center}
+\begin{tabular}[h]{c|c|c}
+& $M$ & $\bar M$\\\hline
+\rule{0mm}{5mm}$C$ & \Red{80} & 20\\\hline
+\rule{0mm}{5mm}$\bar C$ & \Blue{950} & 8950 \\\hline
+\end{tabular}
+\end{center}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+What is $p(C|M)$?
+
+\begin{center}
+\begin{tabular}[h]{c|c|c}
+& $M$ & $\bar M$\\\hline
+\rule{0mm}{5mm}$C$ & \Red{80} & 20\\\hline
+\rule{0mm}{5mm}$\bar C$ & \Blue{950} & 8950 \\\hline
+\end{tabular}
+\end{center}
+
+$p(C|M)$ is obtained as the proportion of all positive
+mammographies for which there actually is breast cancer
+
+\[
+p(C|M)\;=\;\frac{p(C,M)}{p(C,M) + p(\bar C ,M)}
+\;=\;\frac{p(C,M)}{p(M)}\;=\;\frac{\Red{80}}{\Red{80} + \Blue{950}}\;\simeq\;7.8\%
+\]
+
+This is an example of Bayes' rule:
+\[
+p(A|B) \;=\; \frac{p(B|A)p(A)}{p(B)}.
+\]
+Which is just a consequence of the definition of \Blue{\emph{conditional
+  probability}}
+\[
+p(A|B)\;=\;\frac{p(A,B)}{p(B)},\text{\ \ \ \ (where $p(B)\neq 0$)}.
+\]
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Just two rules of probability theory}
+
+Astonishingly, the rich theory of probability can be derived using just two rules:
+
+The \Red{\emph{sum rule}} states that
+\[
+p(A)\;=\;\sum_B p(A,B), \text{\ \ \ \ or\ \ \ \ } 
+p(A)\;=\;\int_B p(A,B)dB,
+\]
+for discrete and continuous variables. Sometimes called \Blue{\emph{marginalization}}.
+
+The \Red{\emph{product rule}} states that
+\[
+p(A,B)\;=\;p(A|B) p(B).
+\]
+It follows directly from the definition of \Blue{conditional
+  probability}, and leads directly to \Blue{Bayes' rule}
+\[
+\Blue{p(A|B)p(B)}\;=\;p(A,B)\;=\;\Blue{p(B|A)p(A)}\;\;\Rightarrow\;\;
+p(A|B)\;=\;\frac{p(B|A)p(A)}{p(B)}.
+\]
+Special case:\\[0.2ex] if $A$ and $B$ are \Blue{\emph{independent}},
+$p(A|B)\;=\;p(A)$, and thus $p(A,B)\;=\;p(A)p(B)$.
+\end{frame}
+
+\end{document}
