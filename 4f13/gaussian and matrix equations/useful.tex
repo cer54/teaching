@@ -1,0 +1,85 @@
+\input{../style.tex}
+
+\title{Some useful Gaussian and matrix equations}
+\author{Carl Edward Rasmussen}
+\date{June 23rd, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Appendix: Some useful Gaussian identities}
+If $x$ is multivariate Gaussian with mean $\mu$ and
+covariance matrix $\Sigma$
+\[
+p({\bf x}; \mu, \Sigma)\;=\;(2\pi|\Sigma|)^{-D/2}\exp\big(-({\bf
+    x}-\mu)^\top\Sigma^{-1}({\bf x}-\mu)/2\big),
+\]
+then
+\[
+\begin{split}
+\E[{\bf x}]\;&=\;\mu,\\
+\V[{\bf x}]\;&=\;\E[({\bf x}-\E[{\bf x}])^2]\;=\;\Sigma.
+\end{split}
+\]
+
+For any matrix $A$, if ${\bf z} = A{\bf x}$ then ${\bf z}$ is Gaussian and
+\[
+\begin{split}
+\E[{\bf z}] \;&=\; A\mu,\\
+\V[{\bf z}] \;&=\;A\Sigma A^\top.
+\end{split}
+\]
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Matrix and Gaussian identities cheat sheet}
+
+Matrix identities
+\begin{itemize}
+\item Matrix inversion lemma (Woodbury, Sherman \& Morrison formula)
+%
+\[
+(Z+UWV^\top)^{-1}=Z^{-1}-Z^{-1}U(W^{-1}+V^\top Z^{-1}U)^{-1}V^\top Z^{-1}
+\]
+%
+\item A similar equation exists for determinants
+\[
+|Z+UWV^\top|=|Z|\;|W|\;|W^{-1}+V^\top Z^{-1}U|
+\]
+\end{itemize}
+
+The product of two Gaussian density functions
+%
+\[
+\N(\bfx|{\mathbf a},A)\,\N(P^\top\,\bfx|{\mathbf b},B) = z_c\,
+\N(\bfx|{\mathbf c},C)
+\]
+%
+\vspace{-5mm}
+\begin{itemize}
+\item is proportional to a Gaussian density function with covariance and mean
+%
+\[
+C = \left(A^{-1}+P\,B^{-1}P^\top\right)^{-1}\enspace \hspace{1cm} c =
+C\,\left(A^{-1}{\mathbf a}+P\,B^{-1}\,{\mathbf b}\right)
+\]
+%
+\item and has a normalizing constant $z_c$ that is Gaussian both in ${\mathbf
+a}$ and in ${\mathbf b}$ 
+%
+\[
+z_c = (2\,\pi)^{-\frac{m}{2}}|B+P^\top A\,P|^{-\frac{1}{2}}
+\exp\big(-\frac{1}{2}({\mathbf b}-P^\top\,{\mathbf a})^\top
+\left(B+P^\top A\,P\right)^{-1}({\mathbf b}-P^\top\,{\mathbf a})
+\big)
+\]
+%
+\end{itemize}
+\end{frame}
+
+\end{document}
+

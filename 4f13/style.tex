@@ -1,0 +1,82 @@
+\documentclass[10pt]{beamer}
+\usefonttheme{professionalfonts,serif}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\usepackage[numbers,sort]{natbib}
+\renewcommand{\rmdefault}{psbx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{eulervm}
+
+\usetheme{default}           % tips from David Blei
+\useinnertheme{circles}
+\useoutertheme{infolines}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+\usecolortheme{seahorse}
+\setbeamersize{text margin left=2mm,text margin right=2mm}
+
+\graphicspath{{../../figures/}}
+
+\definecolor{mypine}{rgb}{0.05,0.45,0.05}
+\definecolor{mycyan}{rgb}{0.0,0.9,0.9}
+\newcommand{\Red}{\textcolor{red}}
+\newcommand{\Blue}{\textcolor{blue}}
+\newcommand{\Green}{\textcolor{mypine}}
+\newcommand{\PineGreen}{\textcolor{mypine}}
+\newcommand{\Magenta}{\textcolor{magenta}}
+\newcommand{\Cyan}{\textcolor{mycyan}}
+
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{{\scriptsize^{\top}}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\KL}{\mathcal{KL}}
+\newcommand{\cut}[1]{}
+\newcommand{\trace}{\operatorname{trace}}
+
+\newcommand{\bmu}{{\boldsymbol{\mu}}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\bphi}{\boldsymbol{\phi}}
+\newcommand{\bPhi}{\boldsymbol{\Phi}}
+\newcommand{\bSigma}{\boldsymbol{\Sigma}}
+\newcommand{\bpi}{\boldsymbol{\pi}}
+\newcommand{\blambda}{\boldsymbol{\lambda}}
+
+\newcommand{\argmax}{\operatorname{argmax}}
+\newcommand{\argmin}{\operatorname{argmin}}
+\newcommand{\ci}{{\bot\negthickspace\negthickspace\bot}} % conditional indep.
+\newcommand{\neigh}{\operatorname{ne}}
+\newcommand{\vectr}[2]{  \left[ \!\!\begin{array}{c} #1 \\
+      #2 \end{array} \!\!\right]}
+\newcommand{\deff}{\stackrel{\mathrm{def}}{=}}
+\newcommand{\deldel}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\maketilde}{\raisebox{0.4ex}{\tiny $\sim$}}
+\newcommand{\bfa}{\mathbf a}
+\newcommand{\bfb}{\mathbf b}
+\newcommand{\bfe}{\mathbf e}
+\newcommand{\bff}{\mathbf f}
+\newcommand{\bfk}{\mathbf k}
+\newcommand{\bfm}{\mathbf m}
+\newcommand{\bfn}{\mathbf n}
+\newcommand{\bfp}{\mathbf{p}}
+\newcommand{\bfs}{\mathbf s}
+\newcommand{\bfu}{\mathbf u}
+\newcommand{\bfx}{\mathbf x}
+\newcommand{\bfy}{\mathbf y}
+\newcommand{\bft}{\mathbf t}
+\newcommand{\bfv}{\mathbf v}
+\newcommand{\bfw}{\mathbf w}
+\newcommand{\bfA}{\mathbf A}
+\newcommand{\bfI}{\mathbf I}
+\newcommand{\bfK}{\mathbf K}
