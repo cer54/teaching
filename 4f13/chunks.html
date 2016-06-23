@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Probabilisitc Machine Learning (4F13) chunks</title>
+</head>
+<body>
+
+<h2>Probabilistic Machine Learning chunks</h2>
+
+The topics and concepts taught in the Probabilisitc Machine Learning
+course is broken down into a number of <em>chunks</em>, which are
+detailed in this page. The goal of this organisation is to help
+students to be able to identify and find material. Chunks are designed
+to be short, and fairly self contained, and clearly labeled with
+content, prerequisites and relationships to other chunks.  
+
+The entire course falls naturally in three parts, 
+
+
+<h2>Part I: Supervised non-parametric probabilistic inference using
+Gaussian processes</h2>
+
+<ol>
+<li>Linear in the parameters regression
+  <ul>
+  <li>making predictions, concept of a model</li>
+  <li>least squares fit</li>
+  <li>requires linear algebra</li>
+  <li>limitations: underfitting and overfitting</li>
+  </ul>
+</li>
+
+<li>Likelihood and the concept of noise
+<ul>
+  <li>Gaussian iid noise</li>
+  <li>Maximum likelihood fitting</li>
+  <li>Equivalence to least squares</li>
+  <li>Motivation of inference with multiple hypotetheses</li>
+</ul>
+</li>
+
+<li>Probability basics
+<ul>
+  <li>Medical example</li>
+  <li>Joint, conditional and marginal probabilities</li>
+  <li>The two rules of probability: sum and product</li>
+  <li>Bayes rule</li>
+</ul>
+</li>
+
+<li>Bayesian inference and prediction with finite regression models
+<ul>
+  <li>Likelihood and prior</li>
+  <li>Posterior and predictive distribution</li>
+  </ul>
+</li>
+
+<li>Marginal likelihood
+<ul>
+  <li>Bayesian model selection</li>
+  <li>MCMC based explanation of how the marginal likelihood works</li>
+  <li>Average the likelihood over the prior: example with polynomials</li>
+</ul>
+</li>
+    
+<li>Distributions over parameters and over functions
+   [Grab slide 16, 21 and 22 from lect0102]
+<ul>
+  <li>Motivation: representation of multiple hypotheses</li>
+  <li>Concept of prior over functions and over parameters</li>
+  <li>Inference</li>
+  <li>Priors over functions are priors over long vectors</li>
+</ul>
+</li>
+
+<li>Gaussian process priors
+<ul>
+  <li>From finite multi-variate Gaussians to Gaussian processes</li>
+  <li>GP definition</li>
+  <li>Conditional generation and joint generation</li>
+  <li>Marginal and conditional</li>
+  <li>In pictures: prior and posterior</li>
+  <li>In algebra: prior and posterior</li>
+  <li>An analytic marginal likelihood, and some intuition</li>
+  <li>Desirable properties of priors over functions (idea: write down
+     the "telescopic" products of conditionals expansion, and realize
+     that you cannot really do anything without marginalization)</li>
+</ul>
+</li>
+
+<li>Linear in the parameters models are particular case GPs
+<ul>
+  <li>From infinite linear models to GPs: the Gaussian RBF case</li>
+  <li>From infinite linear models to GPs: the infinite NN case (w/o proof)</li>
+  <li>Splines are GPs</li>
+  <li>What's your prior (polynomials are a bad idea)</li>
+</ul>
+</li>
+
+<li>Practical model selection with GPs
+<ul>
+  <li>Evidence: optimize or integrate out?</li>
+  <li>A variety of covariance functions and how to compose new ones</li>
+     (products, sums of cov funs, g(x)k(x,x')g(x'), etc)</li>
+  <li>Walk through mauna loa fit example</li>
+</ul>
+</li>
+
+<li>The gpml toolbox
+</li>
+
+</ol>
+
+<h2>Part II: Ranking</h2>
+
+<ol start="11">
+<li>Ranking: motivation and tennis example
+<ul>
+  <li>Competition in sports and games (TrueSkill problem, match making)</li>
+  <li>Tennis: the ATP ranking system explained</li>
+  <li>Shortcomings: what does one need to make actual predictions?
+  (who wins?)</li>
+</ul>
+</li>
+
+<li>The TrueSkill ranking model
+<ul>
+  <li>Change: get rid of variable 's' (difference of skills)</li>
+  <li>Generative model with known skills</li>
+  <li>The likelihood in pictures and equations</li>
+  <li>Priors on skills</li>
+  <li>Predictive distribution in closed analytical form</li>
+  <li>Graphical representation wiht a factor graph for the generative model</li>
+  <li>Question: in generative model factor graph the weights are not connected
+      		to each other via common factors, however, the posterior over
+		weights does not factorize. What?</li>
+</ul>
+</li>
+
+<li>Factor graphs and graphical models
+<ul>
+  <li>Motivation</li>
+  <li>Various types of graphical models</li>
+  <li>Factor graphs to represent structured probabilistic models</li>
+  <li>Message passing algorithms for inference</li>
+</ul>
+</li>
+
+<li>Approximate inference with EP on the full graph
+<ul>
+  <li>Schedule on the full graph</li>
+  <li>EP approximation</li>
+  <li>Moments of truncated Gaussians</li>
+  <li>A detailed program view in 6 steps</li>
+</ul>
+</li>
+
+<li>Gibbs sampling
+</li>
+
+<li>Gibbs sampling inference applied to TrueSkill
+<ul>
+  <li>Gibbs sampling applied to True Skill, be super-explicit about
+  sampling from p(w,t|y) and ignoring samples from t as a way to
+  marginalize over it. Alternate between sampling from p(t|w,y) and
+  p(w|t,y) = p(w|t).</li>
+</ul>
+</li>
+
+</ol>
+
+<h2>Part III: Modeling text</h2>
+
+<ol start="17">
+<li>Discrete distributions over binary variables (tossing coins)
+<ul>
+  <li>Philosophical discussion about coins and priors</li>
+  <li>Distributions on probabilities</li>
+  <li>Bernoulli, binomial, Beta</li>
+  <li>Sequences of throws: difference between discrete distribution
+       		    	    and Binomial distribution</li>
+  <li>Bayes rule for discrete-Beta models</li>
+</ul>
+</li>
+
+<li>Models of text
+<ul>Problem setting: how to model documents?
+  <li>Example: NIPS corpus</li>
+  <li>Power laws on word frequencies...</li>
+  <li>Word frequencies is the maximum likelihood solution</li>
+</ul>
+</li>
+
+<li>A Bayesian model of text
+<ul>
+  <li>Posterior distributions over the probability simplex</li>
+  <li>Dirichlet distributions</li>
+</ul>
+</li>
+
+<li>Bayesian mixture of multinomials
+</li>
+
+<li>LDA
+</li>
+
+</ol>
+
+= Improvements =
+
+* Finite linear in the parameters probabilistic inference part:
+- Be explicit about penalized ML, aka maximum a posteriori.
+
+* GP part: 
+- Be more careful about "sampling functions." It's possible
+to sample a finite collection of function values, and one can
+condition on those to obtain a narrower posterior. But it's important
+to realize that there exist an infinite number of functions that share
+this common subset of function values.
+
+* Tennis exercise: subtract 0.5 instead of 1 from PP matrix.
+
+* How do the exercises fit in the coursera view of the course?
+  
+</body>
+</html>

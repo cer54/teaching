@@ -1,4 +1,7 @@
 -- Part I --
+
+Supervised non-parametric probabilistic inference using Gaussian processes
+
 1) Linear in the parameters regression
    - making predictions, concept of a model
    - least squares fit
