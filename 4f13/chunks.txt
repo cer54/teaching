@@ -36,7 +36,7 @@ Supervised non-parametric probabilistic inference using Gaussian processes
    - Motivation: representation of multiple hypotheses
    - Concept of prior over functions and over parameters
    - Inference
-   - Priors over functions are priors over long vectors
+   - Direct Priors over functions are priors over long vectors
 
 7) Gaussian process priors
    - From finite multi-variate Gaussians to Gaussian processes
@@ -127,8 +127,6 @@ Supervised non-parametric probabilistic inference using Gaussian processes
 20) Bayesian mixture of multinomials
 
 21) LDA
-
-[RET: variational EM in here?]
 
 = Improvements =
 
