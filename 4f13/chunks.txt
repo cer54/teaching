@@ -12,29 +12,31 @@ Supervised non-parametric probabilistic inference using Gaussian processes
    - Gaussian iid noise
    - Maximum likelihood fitting
    - Equivalence to least squares
-   - Motivation of inference with multiple hypotetheses
+   - Motivation of inference with multiple hypotheses
 
 3*) Probability basics
     - Medical example
     - Joint, conditional and marginal probabilities
     - The two rules of probability: sum and product
-    - Bayes rule
+    - Bayes’ rule
 
 4) Bayesian inference and prediction with finite regression models
-   - Likelihood and prior
+   - Likelihood and prior 
    - Posterior and predictive distribution
+
+[RET: At what point do you distinguish between parameters and latent variables?]
 
 5) Marginal likelihood
    - Bayesian model selection
    - MCMC based explanation of how the marginal likelihood works
    - Average the likelihood over the prior: example with polynomials
 
-6) Distributions over parameters and over functions
+6) Distributions over parameters and over functions [RET: priors directly on functions?]
    [Grab slide 16, 21 and 22 from lect0102]
    - Motivation: representation of multiple hypotheses
    - Concept of prior over functions and over parameters
    - Inference
-   - Priors over functions are priors over long vectors
+   - Direct Priors over functions are priors over long vectors
 
 7) Gaussian process priors
    - From finite multi-variate Gaussians to Gaussian processes
@@ -93,6 +95,8 @@ Supervised non-parametric probabilistic inference using Gaussian processes
     - Moments of truncated Gaussians
     - A detailed program view in 6 steps
 
+[RET: explicitly state that this is dynamic programming and therefore connected to forwards/backwards, Kalman filtering, belief propagation?]
+
 15*) Gibbs sampling
 
 16) Gibbs sampling inference applied to TrueSkill
@@ -108,7 +112,7 @@ Supervised non-parametric probabilistic inference using Gaussian processes
      - Bernoulli, binomial, Beta
      - Sequences of throws: difference between discrete distribution
        		    	    and Binomial distribution
-     - Bayes rule for discrete-Beta models
+     - Bayes’ rule for discrete-Beta models
 
 18) Models of text
     - Problem setting: how to model documents?
@@ -139,4 +143,6 @@ this common subset of function values.
 * Tennis exercise: subtract 0.5 instead of 1 from PP matrix.
 
 * How do the exercises fit in the coursera view of the course?
+
+[RET: would be nice to get concept of typicality in here somewhere, perhaps linked to pathologies of MAP inference and why Monte Carlo is hard?]
   

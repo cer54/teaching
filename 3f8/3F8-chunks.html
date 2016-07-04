@@ -1,0 +1,167 @@
+Introduction to inference (2L)
+
+sum and product rule, subjectivity of inference [randomness in probability theory]
+
+arguments for optimality of probabilistic inference: cox?s axioms / dutch book {high level description}
+
+Revision of maximum likelihood and Bayesian estimation through examples
+
+exponential decay
+biased coin [think of another example and whether this can be related to model comparison later]
+
+Revision of Bayesian decision theory
+Lingo and related topics? [supervised learning, unsupervised learning, reinforcement learning]
+ 
+Model comparison (1L)
+
+Occam factors in Bayesian inference
+Model averaging
+David?s picture of simple and complex models [pg. 348]
+MDL and information theory?
+Examples
+ 1. David?s box example
+ 2. inference for progression of a numerical series
+3. biased coin versus unbiased coin?
+
+Regression (1L)
+
+What is it?
+Applications / motivating examples?
+Least squares, normal equations
+Bayesian inference version [via sum and product rules]
+[1D inputs, multi-dimensional inputs, non-linearly expanded inputs ]
+Different noise models / priors on parameters?
+Generalisation / over-fitting / under-fitting 
+
+Examples:
+Gaussian [running example throughout]  
+polynomial regression [non-linear example]
+Gaussian basis functions [c.f. the lab]
+
+Revision of properties of multivariate Gaussian probability density [0L, homework]
+definition
+moments including normalising constant
+product of two Gaussians = Gaussian
+addition of two Gaussian rvs = Gaussian random variable
+linear transformation of revs
+[Bayesian fitting?]
+[Fourier transform, how to generate gaussian revs from uniform, CLT?]
+[matrix algebra]
+
+Example / question:
+correlated 2D gaussian, what does observing x_1 = -1 tell us about x_2? What is p(x_2|x_1)
+same problem but inference context 
+
+General probability distributions  [0L, homework]
+
+dirichlet
+bernoulli 
+gamma
+uniform
+beta 
+categorical/discrete
+binomial
+poisson
+
+Example / questions
+bent coin
+?
+
+Classification (2L)
+What is it?
+Example applications
+simple linear classifier [Heaviside function] / regularisation {single neuron as classifier slides}
+Logistic regression probabilistic model
+Training logistic regression using optimisation [Newton?s method poss in supplementary material?]
+Non-linear feature expansions for logistic regression
+[Batch vs online]
+[Non-linear/multinomial]
+
+Demo [? leave for lab]
+
+
+Clustering (2L)
+What is it?
+Example applications
+K-means
+Problems 
+The Mixture of Gaussians Model
+The expectation maximisation algorithm (see KL chunk)
+[Proof algorithm converges / monotonically increases likelihood]
+[Variational calculus]
+Soft K-means
+EM as coordinate ascent optimisation vs direct optimisation
+[demo / schematics showing free-energy surface]
+
+
+KL divergence and calculus of variations  [0L, homework]
+KL divergence {asymmetry, non-negativity, examples discrete and Gaussian?, zero forcing/covering?}
+calculus of variations
+Langrange multipliers [not taught in second year]
+
+Example:
+mean field example?
+
+Sequence models (3L)
+
+Examples of sequence modelling problems
+Markov models 
+Properties of generative model: stationary distribution [explicit slide to explain what convergence means?]
+Intuitive question about fitting an N-gram model
+Example: Dasher
+AR Gaussian models
+Properties of generative model e.g. moments / stationary distribution
+Example: Pendulum swing up
+
+Hidden Markov models
+Gaussian latent variables: LGSSMs
+Discrete variables: HMMs
+Examples
+
+Inference: varieties
+Kalman filter
+forward backward [bugs on a grid?]
+dynamic programming
+ML learning
+
+[complexity / log-sum]
+Applications / Examples [?]
+
+Basic Monte Carlo (3L)
+
+The need for approximate inference methods ? joint distribution tractable, posterior is typically intractable due to the denominator
+
+Basic idea: simple Monte Carlo
+Why this is not generally applicable
+
+Rejection sampling
+idea
+success
+failure
+[demo of algorithm]
+back of the envelope calculation to identify when it will fail
+
+Importance sampling
+idea
+success
+failure
+[demo of algorithm]
+back of the envelope calculation to identify when it will fail
+
+Metropolis Hastings and Markov Chain Monte Carlo
+high level idea [refer back to discrete n-gram model section c.f. stationary distribution of a Markov chain]
+e.g. metropolis hastings with a discrete target distribution and proposal
+[example calculation from Murray good to go through]
+success
+failure
+[demo of algorithm]
+back of the envelope calculation to identify when it will fail
+
+Gibbs Sampling
+as a special case of MH with an acceptance ratio of 1 
+
+Examples:
+running example of 1D linear regression
+{look at Iain?s webpage}
+
+ 
