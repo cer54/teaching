@@ -1,0 +1,207 @@
+\input{../style.tex}
+
+\title{Bayesian inference and prediction with finite regression models}
+\author{Carl Edward Rasmussen}
+\date{July 1st, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Key concepts}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Posterior probability of a function}
+
+Given the \Blue{prior}  functions \Blue{$p(\bff)$} how can we make predictions?
+\begin{itemize}
+\item Of all functions generated from the prior, keep those that fit the data.
+\item The notion of closeness to the data is given by the \Red{likelihood $p(\bf
+y|\bff)$}.
+\item We are really interested in the posterior distribution over functions:
+%
+\[
+\Green{p(\bff|\bfy)}\;=\;\frac{\Red{p(\bfy|\bff)}\,\Blue{p(\bff)}}{\Cyan{p(\bfy)
+}}
+{\; \; \; \; \; \;} \mathrm{Bayes\; Rule}
+\]
+%
+\end{itemize}
+
+\parbox{0.45\textwidth}{
+\centerline{\includegraphics[width=0.45\textwidth]{random_polynomials_degree17.pdf}}
+\centerline{Some samples from the prior}
+}
+\parbox{0.45\textwidth}{
+\centerline{\includegraphics[width=0.45\textwidth]{samples_posterior_degree17.pdf}}
+\centerline{Samples from the posterior}
+}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Priors on parameters induce priors on functions}
+
+A model $\mathcal{M}$ is the choice of a \Red{model structure} and of \Blue{para
+meter values}.  
+%
+\[
+f_\bfw(x)\; =\; \sum_{m=0}^{\Red{M}} \Blue{w_m}\,\Red{\phi_m(x)}
+\]
+%
+The prior $p(\bfw|\mathcal{M})$ determines what \Blue{functions} this model can generate. Example: \vspace*{-1.5ex}
+\begin{itemize}
+\item Imagine we choose $M=17$, and $p(w_m)=\N(w_m;\;0, \sigma_\bfw^2)$.
+\item We have actually defined a \Blue{prior distribution over functions $p(\bff|\mathcal{M})$}.
+\end{itemize} \vspace*{-1.5ex}
+
+\parbox{0.49\textwidth}{
+This figure is generated as follows:
+\begin{itemize}
+\item Use polynomial basis functions, $\phi_m(x)=x^m$.
+\item Define a uniform grid of $n=100$ values in $x$ from $[-1.5, 2]$.
+\item Generate matrix $\bPhi$ for $M=17$.
+%\texttt{Phi = repmat(x,1,M+1).\^{}repmat(0:M,N,1);}
+\item Draw $w_m\sim{\cal N}(0,1)$.
+\item Compute and plot $\bff=\bPhi_{n\times 18}\,\bfw$.
+\end{itemize}
+}
+\parbox{0.45\textwidth}{
+\centerline{\includegraphics[width=0.5\textwidth]{random_polynomials_degree17.pdf}}
+}
+
+\end{frame}
+
+
+\cut{\begin{frame}
+\frametitle{Priors over functions from other finite linear models}
+
+We could have used very different types of basis functions. Two examples:
+
+\parbox{0.49\textwidth}{
+\begin{itemize}
+\item Localised basis functions:
+%
+\[
+\phi_m(x_n) = \exp\left(-(x_n-c_m)^2/\,\gamma^2\right)
+\]
+%
+\end{itemize}
+\centerline{\includegraphics[width=0.49\textwidth]{fig_rvm_prior_gaussbf.pdf}}
+}
+\parbox{0.49\textwidth}{
+\begin{itemize}
+\item
+Alternative basis functions:
+%
+\[
+\phi_m(x_n) = \log\left(1+(x_n-c_m)^2/\,\gamma^2\right)
+\]
+%
+\end{itemize}
+\centerline{\includegraphics[width=0.49\textwidth]{fig_rvm_prior_tanhbf.pdf}}
+}
+
+\vfill
+
+Some remarks:
+\begin{itemize}
+\item We are not really interested in the $w_m$, they are \Red{nuisance parameters}.
+\item We want to concentrate on specifying the \Blue{prior over functions $p(\bff)$ directly}.
+\end{itemize}
+
+\end{frame}
+}
+
+
+\begin{frame}
+\frametitle{Maximum likelihood, parametric model}
+
+Supervised parametric learning:
+\begin{itemize}
+\item data: ${\bf x}, {\bf y}$
+\item model $\mathcal{M}$: $y = f_{\bf w}(x) + \varepsilon$
+\end{itemize}
+
+Gaussian likelihood:
+\[
+\Red{p({\bf y}|{\bf x},{\bf w}, \mathcal{M})}\;\propto\;
+\prod_{n=1}^N\exp(-\tfrac{1}{2}(y_n-f_{\bf w}(x_n))^2/\sigma^2_{\rm noise}).
+\]
+
+Maximize the likelihood:
+\[
+\Blue{{\bf w}_{\rm ML}}\;=\;\operatornamewithlimits{argmax}_{\bf w}
+\Red{p({\bf y}|{\bf x},{\bf w},\mathcal{M})}.
+\]
+
+Make predictions, by plugging in the ML estimate:
+\[
+\Red{p(y_*|x_*,\Blue{{\bf w}_{\rm ML}},\mathcal{M})}
+\]
+
+\vfill
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Bayesian inference, parametric model, cont.}
+
+Posterior parameter distribution by Bayes rule ({\small $\Green{p(a|b)}=\Blue{p(a)} \Red{p(b|a)}/\Cyan{p(b)}$}):
+\[
+\Green{p({\bf w}|{\bf x},{\bf y},\mathcal{M})}\;=\;\frac{\Blue{p({\bf w}|\mathcal{M})}
+\Red{p({\bf y}|{\bf x},{\bf w},\mathcal{M})}}{\Cyan{p({\bf y}|{\bf x},\mathcal{M})}}
+\]
+
+Making predictions (marginalizing out the parameters):
+\[
+\begin{split}
+p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;&=\;
+\int p(y_*,{\bf w}|{\bf x}, {\bf y}, x_*, \mathcal{M})d{\bf w}\\
+&=\;\int \Red{p(y_*|{\bf w},x_*,\mathcal{M})}\Green{p({\bf w}|{\bf x}, {\bf y},\mathcal{M})}d{\bf w}.
+\end{split}
+\]
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Posterior and predictive distribution in detail}
+
+For a linear-in-the-parameters model with Gaussian priors and Gaussian noise:
+\begin{itemize}
+\item Gaussian \Blue{\emph{prior}} on the weights: 
+$\Blue{p(\bfw|\mathcal{M})}=\N(\bfw;\;\mathbf{0},\,\sigma_\bfw^2\,\bfI)$
+\item Gaussian \Red{\emph{likelihood}} of the weights:
+$\Red{p(\bfy|\bfx,\bfw,\mathcal{M}})=\N(\bfy;\;\bPhi\,\bfw,\,\sigma_\mathrm{noise}^2\,\bfI)$
+\end{itemize}
+
+\Green{Posterior} parameter distribution by Bayes rule $p(a|b)=p(a)p(b|a)/p(b)$:
+\[
+\Green{p({\bf w}|{\bf x},{\bf y},\mathcal{M})}\;=\;\frac{\Blue{p({\bf w}|\mathcal{M})}
+\Red{p({\bf y}|{\bf x},{\bf w},\mathcal{M})}}{\Cyan{p({\bf y}|{\bf x},\mathcal{M})}}
+\;=\; \N(\bfw;\;\bmu,\,\bSigma)
+\]
+\[
+\bSigma\;=\;\left(\sigma_\mathrm{noise}^{-2}\bPhi^\top\bPhi+\sigma_\bfw^{-2}\,\bfI\right)^{-1}
+\mathrm{\; \; \; and \; \; \; \; }
+\bmu\;=\;
+\Big(\bPhi^\top\bPhi+\frac{\sigma_\mathrm{noise}^2}{\sigma_\bfw^2}\,\bfI\Big)^{-1}\bPhi^\top\bfy
+\]
+
+The predictive distribution is given by:
+\[
+p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;=\;
+\N(y_*;\; \bphi(x_*)^\top\bmu,\,\bphi(x_*)^\top\bSigma\bphi(x_*)+\sigma_\mathrm{noise}^2)
+\]
+
+\end{frame}
+
+\end{document}

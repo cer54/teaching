@@ -2,7 +2,7 @@
 
 \title{Modelling data}
 \author{Carl Edward Rasmussen}
-\date{June 29th, 2016}
+\date{June 30th, 2016}
 
 \begin{document}
 
@@ -11,69 +11,83 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{Key concepts}
+
+Non-technical introduction to terminology in modelling in machine learning:
+\begin{itemize}
+\item purpose of models
+\item central concepts
+\begin{itemize}
+\item data
+\item parameters
+\item latent variables
+\end{itemize}
+\item prediction and probabilistic predictions
+\item role of assumptions
+\item training and testing
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Purpose of models}
+
+Mathematical models are useful for many purposes, including
+\begin{itemize}
+\item making predictions. For example, in a time series model, we may want to predict the future from the past. Often predictions are inherently uncertain. In \Blue{\emph{probabilistic models}} probabilities express the confidence of predictions
+\item generalize from observations in the training set to new test cases (interpolation and extrapolation)
+\item understanding and interpreting statistical relationships in the data 
+\item evaluating the relative probability of hypothesis about the data 
+\item compressing or summarising data
+\item generating more data, from a similar distribution as the training set
+\end{itemize}
+\vskip 1ex
+Different tasks require different models. Useful models focus on some aspects and neglect others, to \Blue{\emph{trade off accuracy with simplicity and interpretability}}.
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Origin of a model}
 
-Mathematical models are useful for a number of different purposes.\\
-
 Models may originate from different sources, such as
-\begin{description}
-\item[first principles] For example, Newtonian mechanics is a model of planetary motion with a high degree of accuracy
-\item[observations, data] For example the annual production of timber per hectare of forrest, and its dependency on geographical and climatic factors may be modelled based on \emph{data}.
-\end{description}
-Most practical models lie somewhere within the  above spectrum, involving both first principles and data.
-
-\emph{Machine learning} is a broad term which covers the theory and practise of mathematical models which to a significant degree rely on data.  
-\end{frame}
-
-
-\begin{frame}
-\frametitle{The purpose of a model}
-
-Mathematical models are useful for a number of different purposes.
-
-These include, but are not restricted to
 \begin{itemize}
-\item making predictions. For example, in a time series model, we may want to predict the future from the past and the present
-\item generalize from the points in the training set to new test cases (interpolation and extrapolation).
-\item understanding and interpreting statistical relationships in the data
-\item evaluating the relative probability of various hypothesis about the data
-\item compressing or summarising data.
+\item {\bf first principles} For example, Newtonian mechanics is a model of planetary motion with a high degree of accuracy
+\item {\bf observations, data} For example the annual production of timber per hectare of forrest, and its dependency on geographical and climatic factors may be modelled based on \emph{data}.
 \end{itemize}
 
-Because there are many uses for models, the usefulness of a model depends on which task we are trying to solve, different models are useful for different purposes.
+Most practical models lie somewhere within the  above spectrum, involving both first principles and data.\\[1ex]
+
+\Blue{\emph{Machine learning}} is a broad term which covers the theory and practise of mathematical models which to a significant degree rely on data.  
 \end{frame}
 
 
 
-
 \begin{frame}
-\frametitle{Assumptions and simplifying assumptions}
+\frametitle{Knowledge, assumptions and simplifying assumptions}
 
-Every model relies on (explicit or implicit) assumptions.
+Every model relies on (explicit or implicit) assumptions, such as
+\begin{itemize}
+\item {\bf knowledge} For example, we know that a variable which measures the distance between two points must be non-negative.
+\item {\bf assumptions} It could be assumed that income is independent of gender given age and profession. This assumption may be either true or false. 
+\item {\bf simplifying assumptions} We might assume that the response to a drug depends linearly on the dosage within some range. We don't believe that such an assumption is necessarily literally true, but rather that it is \Blue{\emph{good enough}}, not to distort the uses we have of the model too much.
+\end{itemize}
 
+Probabilistic models may use \Blue{\emph{priors}} to express knowlege (or beliefs) about aspects of the model.\\[1ex] 
 
-There are two types of assumptions
-\begin{description}
-\item[insights] For example, it might be known that a variable which measures the distance between two points must be non-negative.
-\item[simplifying assumptions] We might assume that the response to a drug depends linearly on the dosage within some range. We don't believe that such an assumption is necessarily literally true, but rather that it is \emph{good enough}, not to distort the uses we have of the model too much.
-\end{description}
+Simplifying assumptions often facilitate use of the model. But, the conclusions drawn from a model are conditional on the assumptions being valid.\\[1ex]
 
-Often, simplifying assumptions give rise to huge mathematical simplifications.
-
-But, the conclusions drawn from a model are conditional on the assumptions being valid.
-
-Practical modelling is therefore always a trade off between model expressivity on one hand and simplicity on the other.
+Practical modelling is therefore always a trade off between model expressivity  and computational simplicity.
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Obervations, parameters and latent variables}
+\frametitle{Observations, parameters and latent variables}
 
 \centerline{\includegraphics[width=0.4\textwidth]{d1.pdf}}
 
 This time series model is imagined repeated for $t=1,\ldots,T$. It has \Blue{\emph{observations}} $y$ (shaded) for each time point and also \Blue{\emph{unobserved}} or \Blue{\emph{hidden}} or \Blue{\emph{latent variables}} $x$ and two sets of \Blue{\emph{parameters}} $A$ (for transitions) and $C$ (for emissions).\\[1ex]
 
-To use the model we must decide what to do with all unobserved quantities. Possible options include \Red{\emph{inference}}, \Red{\emph{learning}}, \Red{\emph{estimation}} and \Red{\emph{marginalisation}}.\\[1ex]
+To use the model we must decide what to do with all unobserved quantities. This is
+broadly known as \Blue{\emph{learning}} or \Blue{\emph{training}} a model. Options include \Red{\emph{inference}}, \Red{\emph{estimation}}, \Red{\emph{sampling}} and \Red{\emph{marginalisation}}.\\[1ex]
 
 Note, that the difference between \Blue{\emph{latent variables}} and \Blue{\emph{parameters}} is that the number latent variables grow with the number of observations (in this case, one for each time point), whereas the number of parameters remains constant.
 \end{frame}
@@ -82,12 +96,40 @@ Note, that the difference between \Blue{\emph{latent variables}} and \Blue{\emph
 \begin{frame}
 \frametitle{Practical modelling}
 
-What do we need to do: handle latent variables, handle parameters, model selection
+The specification of a model includes the complete structure as well as all assumptions (and priors) used as well as any pre-specified parameters. 
+
+In practise, we need to be able to do the following tasks
+\begin{itemize}
+\item treat the unobserved quantities (training), including
+\begin{itemize}
+\item the latent variables
+\item the parameters
+\item possibly some aspects of the structure of the model
+\end{itemize}
+\item make predictions on test cases
+\item interpret the trained model, what insights is the model providing?
+\item evaluate the accuracy of model
+\begin{itemize}
+\item note: accuracy on the training and test sets may differ systematically
+\end{itemize}
+\item do model selection and model criticism: chose between different models, or between different variants of a model, what are limitations of the model?
+\end{itemize}
+
+All these tasks need to be solved either exactly or approximately, on a given budget
+of computation and memory.
 \end{frame}
 
 \begin{frame}
-some more about what is the difference between the data and a model. Avoid the term true model.
-\end{frame}
+\frametitle{A common misunderstanding}
 
+The role of a model is to make predictions and provide insight into certain aspects of the data.\\[1ex]
+
+The role of a model is \Red{\emph{not}} to be a complete description of all aspects of the data (only the data itself does this).\\[1ex]
+
+From this perspective, it is clear that terms such as \Blue{\emph{true model}} or \Blue{\emph{correct model}} are \Red{\emph{meaningless}} in the context of machine learning.\\[2ex]
+
+\emph{Essentially, all models are wrong, but some are useful.}\\
+\hfill --- George E. T. Box
+\end{frame}
 
 \end{document}  
