@@ -1,0 +1,1 @@
+This folder only contains the files (config.json, objects.json and the *.mkdn files) that need to be edited by the user. The 'd3-process-map' app can be obtained from https://github.com/nylen/d3-process-map

@@ -1,0 +1,99 @@
+{
+    "title" : "3F8 Topics and Prerequisites",
+    "graph" : {
+        "linkDistance" : 150,
+        "charge"       : -400,
+        "height"       : 800,
+        "numColors"    : 12,
+        "labelPadding" : {
+            "left"   : 3,
+            "right"  : 3,
+            "top"    : 2,
+            "bottom" : 2
+        },
+        "labelMargin" : {
+            "left"   : 3,
+            "right"  : 3,
+            "top"    : 2,
+            "bottom" : 2
+        },
+        "ticksWithoutCollisions" : 50
+    },
+    "types" : {
+        "PREQ" : {
+            "short" : "Prerequisites",
+            "long"  : "Prerequisite courses for topics in 3F8"
+        },
+        "Int2Inf" : {
+            "short" : "Intro to Inference",
+            "long"  : "Introduction to Inference"
+        },
+        "MC" : {
+            "short" : "Model Comparison",
+            "long"  : "Model Comparison"
+        },
+        "HW" : {
+            "short" : "Homework",
+            "long"  : "Homework Topics"
+        },
+        "R" : {
+            "short" : "Regression",
+            "long"  : "Regression"
+        },
+        "CLF" : {
+            "short" : "Classification",
+            "long"  : "Classification"
+        },
+        "CLR" : {
+            "short" : "Clustering",
+            "long"  : "Clustering"
+        },
+        "SM" : {
+            "short" : "Sequence Models",
+            "long"  : "Sequence Models"
+        },
+        "BMC" : {
+            "short" : "Basic Monte Carlo",
+            "long"  : "Basic Monte Carlo"
+        }
+    },
+    "constraints" : [
+        {
+            "has"    : { "type" : "Int2Inf" },
+            "type"   : "position",
+            "x"      : 0.2,
+            "y"      : 0.2,
+            "weight" : 0.7
+        }, {
+            "has"    : { "type" : "MC" },
+            "type"   : "position",
+            "x"      : 0.8,
+            "y"      : 0.2,
+            "weight" : 0.7
+        }, {
+            "has"    : { "type" : "HW" },
+            "type"   : "position",
+            "x"      : 0.2,
+            "y"      : 0.5,
+            "weight" : 0.7
+        }, {
+            "has"    : { "type" : "R" },
+            "type"   : "position",
+            "x"      : 0.8,
+            "y"      : 0.5,
+            "weight" : 0.7
+        }, {
+            "has"    : { "type" : "CLF" },
+            "type"   : "position",
+            "x"      : 0.2,
+            "y"      : 0.8,
+            "weight" : 0.7
+        }, {
+            "has"    : { "type" : "BMC" },
+            "type"   : "position",
+            "x"      : 0.8,
+            "y"      : 0.8,
+            "weight" : 0.7
+        }
+    ]
+}
