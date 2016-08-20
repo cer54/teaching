@@ -1,0 +1,1 @@
+{{Information Theory}} studies the quantification storage and communication of information. (Source: [Information Theory](https://en.wikipedia.org/wiki/Information_theory)).

@@ -1,0 +1,133 @@
+[
+	{
+        "name"    : "Information Theory",
+        "type"    : "PREQ",
+        "depends" : []
+	}, {
+        "name"    : "Numerical Methods",
+        "type"    : "PREQ",
+        "depends" : []
+	}, {
+        "name"    : "Markov Chains",
+        "type"    : "PREQ",
+        "depends" : []
+	}, {
+        "name"    : "Stochastic Processes",
+        "type"    : "PREQ",
+        "depends" : []
+	}, {
+        "name"    : "State-Space Models",
+        "type"    : "PREQ",
+        "depends" : []
+	},  {
+        "name"    : "KL divergence & Calculus of Variations",
+        "type"    : "PREQ",
+        "depends" : [
+        	"Numerical Methods"
+        ]
+	}, {
+        "name"    : "Sum & Product Rules",
+        "type"    : "Int2Inf",
+        "depends" : []
+    }, {
+        "name"    : "ML & Bayesian Estimation",
+        "type"    : "Int2Inf",
+        "depends" : []
+    }, {
+        "name"    : "Bayesian Decision Theory",
+        "type"    : "Int2Inf",
+        "depends" : []
+    }, {
+        "name"    : "Occam's factor & Model averaging",
+        "type"    : "MC",
+        "depends" : [
+            "Bayesian Decision Theory"
+        ]
+    }, {
+        "name"    : "MDL",
+        "type"    : "MC",
+        "depends" : [
+			"Information Theory"
+        ]
+    }, {
+        "name"    : "Multivariate Gaussian Densities",
+        "type"    : "HW",
+        "depends" : []
+	}, {
+        "name"    : "General Probability Distributions",
+        "type"    : "HW",
+        "depends" : []
+    }, {
+        "name"    : "Least Squares, Normal Eqns",
+        "type"    : "R",
+        "depends" : [
+            "ML & Bayesian Estimation"
+        ]
+    }, {
+        "name"    : "Bayesian Inference version",
+        "type"    : "R",
+        "depends" : [
+            "Sum & Product Rules"
+        ]
+    }, {
+        "name"    : "Classification",
+        "type"    : "CLF",
+        "depends" : [
+            "General Probability Distributions",
+			"Numerical Methods"
+        ]
+    },{
+        "name"    : "Mixture of Gaussians",
+        "type"    : "CLR",
+        "depends" : [
+            "Multivariate Gaussian Densities"
+        ]
+    }, {
+        "name"    : "Expectation-Maximisation",
+        "type"    : "CLR",
+        "depends" : [
+            "KL divergence & Calculus of Variations",
+			"Numerical Methods"
+        ]
+    }, {
+        "name"    : "Markov Models & HMMs",
+        "type"    : "SM",
+        "depends" : [
+            "Markov Chains",
+			"State-Space Models"
+        ]
+    }, {
+        "name"    : "AR Gaussian Models",
+        "type"    : "SM",
+        "depends" : [
+            "Stochastic Processes"
+        ]
+    }, {
+        "name"    : "Inference: LGSSMs & HMMs",
+        "type"    : "SM",
+        "depends" : [
+            "State-Space Models",
+			"Multivariate Gaussian Densities"
+        ]
+    }, {
+        "name"    : "Simple Monte Carlo",
+        "type"    : "BMC",
+        "depends" : []
+    }, {
+        "name"    : "Rejection Sampling",
+        "type"    : "BMC",
+        "depends" : []
+    }, {
+        "name"    : "Metropolis-Hastings & MCMC",
+        "type"    : "BMC",
+        "depends" : [
+        	"Markov Chains"
+        ]
+    }, {
+        "name"    : "Gibb's Sampling",
+        "type"    : "BMC",
+        "depends" : [
+            "Metropolis-Hastings & MCMC"
+        ]
+    }
+]
