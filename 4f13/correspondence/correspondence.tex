@@ -1,0 +1,135 @@
+\input{../style.tex}
+
+\title{Linear in the parameters models and GP}
+\author{Carl Edward Rasmussen}
+\date{October 13th, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Key concepts}
+\begin{itemize}
+\item We give an interpretation of the marginal likelihood in terms of
+\begin{itemize}
+\item a data fit
+\item a complexity penalty
+\end{itemize}
+\item covariance functions can be parameterized using hyperparameters
+\item hyperparameters can be fit by optimizing the marginal likelihood
+\begin{itemize}
+\item this is a form of model selection
+\end{itemize}
+\item Occam's razor is automatic and avoids overfitting
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{From random functions to covariance functions}
+
+Consider the class of linear functions:
+\[
+f(x)\;=\;ax+b,\text{\ \ where\ \ }a\sim{\cal N}(0,\alpha),\text{\ \ and\ \ }
+b\sim{\cal N}(0,\beta).
+\]
+We can compute the mean function:
+\[
+\mu(x)\;=\;E[f(x)]\;=\;\int\!\int f(x)p(a)p(b)dadb\;=\;
+\int axp(a)da+\int bp(b)db=0,
+\]
+and covariance function:
+\[
+\begin{split}
+k(x,x')\;=&\;E[(f(x)-0)(f(x')-0)]\;=\;\int\!\int
+(ax+b)(ax'+b)p(a)p(b)dadb\\
+=&\;\int a^2xx'p(a)da+\int b^2p(b)db+(x+x')\int abp(a)p(b)dadb
+=\alpha xx'+\beta.
+\end{split}
+\]
+\end{frame}
+
+
+\begin{frame}
+\frametitle{From finite linear models to Gaussian processes (1)}
+Finite linear model with Gaussian priors on the weights:
+%
+\[
+f(x)\;=\;\sum_{m=1}^M w_m\,\phi_m(x) {\hspace{2cm}} 
+p(\bfw)=\N(\bfw;\; \mathbf{0}, A)
+\]
+%
+The joint distribution of any $\bff=[f(x_1),\ldots,f(x_N)]^\top$ is a
+multivariate Gaussian -- this looks like a Gaussian Process!
+
+The prior $p(\bff)$ is fully characterized by the \Blue{\it mean} and \Red{\it covariance} 
+functions.
+%
+\begin{align*}
+\Blue{m(x)\;=\;E_\bfw\big(f(x)\big)}
+&\;=\;\int\Big(\sum_{m=1}^M w_k\phi_m(x)\Big) p(\bfw) d\bfw
+\;=\;\sum_{m=1}^M \phi_m(x)\int w_m p(\bfw) d \bfw\\
+&\;=\;\sum_{m=1}^M \phi_m(x)\int w_m p(w_m) dw_m\;=\;0
+\end{align*}
+The \Blue{\emph{mean function}} is zero.
+ 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{From finite linear models to Gaussian processes (2)}
+
+\Red{Covariance function} of a finite linear model
+%
+\[
+\begin{array}{l}
+f(x)\;=\;\sum_{m=1}^M w_m\,\phi_m(x)\;=\;\bfw^\top\bphi(x)\\[1mm]
+p(\bfw)\;=\;\N(\bfw;\; \mathbf{0}, A)
+\end{array}
+{\; \; \; \; \; }
+\begin{array}{lr}
+\bphi(x) = [\phi_1(x),\ldots,\phi_M(x)]^\top \!\!\! & \!\!\! _{(M \times 1)}
+\end{array}
+\]
+%
+%
+\begin{align*}
+&\Red{k(x_i, x_j)=Cov_\bfw \big(f(x_i), f(x_j)\big)}=E_\bfw\big(f(x_i)f(x_j)\big)
+ -\underbrace{E_\bfw\big(f(x_i)\big)E_\bfw\big(f(x_j)\big)}_{0}\\[-3mm]
+&=\int\!...\!\int\Big(\sum_{k=1}^M\sum_{l=1}^M w_kw_l\phi_k(x_i)\phi_l(x_j)\Big)
+ p(\bfw)\,d\bfw\\
+&=\sum_{k=1}^M\sum_{l=1}^M \phi_k(x_i)\phi_l(x_j) 
+\underbrace{\iint w_kw_l p(w_k, w_l) dw_kdw_l}_{A_{kl}}
+= \sum_{k=1}^M\sum_{l=1}^M A_{kl}\phi_k(x_i)\phi_l(x_j)
+\end{align*}
+%
+\[
+\boxed{\Red{k(x_i,x_j)}=\bphi(x_i)^\top A \bphi(x_j)}
+\]
+%
+
+Note: If $A=\sigma_\bfw^2 \bfI$ then 
+$k(x_i,x_j)=\sigma_\bfw^2 \sum_{k=1}^M \phi_k(x_i)\phi_k(x_j)=\sigma_\bfw^2\bphi(x_i)^\top\bphi(x_j)$
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{GPs and Linear in the parameters models are equivalent}
+
+We've seen that a Linear in the parameters model, with a Gaussian prior on
+the weights is also a GP.
+
+Note the different computational complexity: GP: ${\cal O}(N^3)$,
+linear model ${\cal O}(NM^2)$ where $M$ is the number of basis
+functions and $N$ the number of training cases.
+
+So, which representation is most efficient?
+
+Might it also be the case that every GP corresponds to a Linear in the
+parameters model?\hfill (Mercer's theorem.)
+\end{frame}
+
+\end{document}

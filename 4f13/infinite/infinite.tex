@@ -1,0 +1,99 @@
+\input{../style.tex}
+
+\title{Finite and infinite basis GPs}
+\author{Carl Edward Rasmussen}
+\date{October 13th, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{From infinite linear models to Gaussian processes}
+
+Consider the class of functions (sums of squared exponentials):
+\[
+\begin{split}
+f(x)\;=&\;\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=-N/2}^{N/2}\gamma_n\exp(-(x-\tfrac{n}{\sqrt{N}})^2),
+\text{\ \ where\ \ }\gamma_n\sim{\cal N}
+(0, 1),\;\forall n\\
+=&\;\int_{-\infty}^\infty\!\! \gamma(u)\exp(-(x-u)^2)du,
+\text{\ \ where\ \ }\gamma(u)\sim{\cal N}(0,1),\;\forall u.
+\end{split}
+\]
+The mean function is:
+\[
+\mu(x)\;=\;E[f(x)]\;=\;\int_{-\infty}^\infty\exp(-(x-u)^2)
+\int_{-\infty}^\infty\!\!\gamma(u) p(\gamma(u))d\gamma(u) \; \; du\;=\;0,
+\]
+and the covariance function:
+\[
+\begin{split}
+E&[f(x)f(x')]\;=\;\int\exp\big(\!-(x-u)^2-(x'-u)^2\big)du\\
+=&\;\int\exp\big(\!-2(u-\frac{x+x'}{2})^2+\frac{(x+x')^2}{2}-x^2-x'^2\big)du
+\;\propto\;\exp\big(\!-\frac{(x-x')^2}{2}\big).
+\end{split}
+\]
+Thus, the squared exponential covariance function is equivalent to regression
+using infinitely many Gaussian shaped basis functions placed everywhere,
+\Red{not just at your training points!}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\!\!\!Using finitely many basis functions may be dangerous!(1)}
+
+Finite linear model with 5 localized basis functions)
+
+\includegraphics[width=0.33\textwidth]{seq_linear_M1.pdf}
+\includegraphics[width=0.33\textwidth]{seq_linear_M2.pdf}
+\includegraphics[width=0.33\textwidth]{seq_linear_M3.pdf}
+
+Gaussian process with infinitely many localized basis functions
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M1.pdf}
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M2.pdf}
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M3.pdf}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\!\!\!Using finitely many basis functions may be dangerous!(2)}
+
+Finite linear model with 5 localized basis functions)
+
+\includegraphics[width=0.33\textwidth]{seq_linear_M4.pdf}
+\includegraphics[width=0.33\textwidth]{seq_linear_M5.pdf}
+\includegraphics[width=0.33\textwidth]{seq_linear_M6.pdf}
+
+Gaussian process with infinitely many localized basis functions
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M4.pdf}
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M5.pdf}
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M6.pdf}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\!\!\!Using finitely many basis functions may be dangerous!(3)}
+
+
+Finite linear model with 5 localized basis functions)
+
+\includegraphics[width=0.33\textwidth]{seq_linear_M7.pdf}
+\includegraphics[width=0.33\textwidth]{seq_linear_M12.pdf}
+\includegraphics[width=0.33\textwidth]{seq_linear_M20.pdf}
+
+Gaussian process with infinitely many localized basis functions
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M7.pdf}
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M12.pdf}
+\includegraphics[width=0.33\textwidth]{seq_fullGP_M20.pdf}
+
+
+\end{frame}
+
+
+\end{document}

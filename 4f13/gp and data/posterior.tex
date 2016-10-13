@@ -1,0 +1,134 @@
+\input{../style.tex}
+
+\title{Posterior Gaussian Process}
+\author{Carl Edward Rasmussen}
+\date{October 13th, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Key concepts}
+\begin{itemize}
+\item we are not interested in random functions
+\item we want to \emph{condition} on the training data
+\item when both prior and likelihood are Gaussian, then
+\begin{itemize}
+\item posterior is a Gaussian process
+\item predictive distributions are Gaussian
+\end{itemize}
+\item pictorial representation of prior and posterior
+\item interpretation of predictive equations
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Gaussian Process Inference}
+
+Recall Bayesian inference in a parametric model.\\[1ex]
+
+The posterior is proportional to the prior times the likelihood.\\[1ex]
+
+The predictive distribution is the predictions marginalized over the
+parameters.\\[1ex]
+
+How does this work in a Gaussian Process model?\\[1ex]
+
+Answer: in our non-parametric model, the ``parameters'' are the function itself!
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Non-parametric Gaussian process models}
+
+In our non-parametric model, the ``parameters'' are the function itself!
+
+Gaussian likelihood, with noise variance $\sigma_{\rm noise}^2$
+\[
+\Red{p({\bf y}|{\bf x}, f, \mathcal{M}_i)\;\sim\;
+{\cal N}({\bf f},\;\sigma^2_{\rm noise}I),}
+\]
+
+Gaussian process prior with zero mean and covariance function $k$
+\[
+\Blue{p(f|\mathcal{M}_i)\;\sim\;{\cal GP}(m\equiv 0,\;k),}
+\]
+
+Leads to a Gaussian process posterior
+\[
+\begin{split}
+\Green{p(f}&\Green{|{\bf x},{\bf y}, \mathcal{M}_i)\;\sim\;{\cal
+    GP}(m_{\rm post},\;k_{\rm post}),}\\
+&\text{where}\left\{\begin{array}{l}\!\!\Green{m_{\rm post}(x)=k(x,{\bf x})[K({\bf x},{\bf x})+\sigma_{\rm noise}^2I]^{-1}{\bf y},}\\
+\Green{k_{\rm post}(x,x')=k(x,x')-k(x,{\bf x})[K({\bf x},{\bf x})+\sigma^2_{\rm noise}I]^{-1}k({\bf x},x'),}\end{array}\right.
+\end{split}
+\]
+
+And a Gaussian predictive distribution:
+\[
+\begin{split}
+p(y_*|x_*,{\bf x},{\bf y}, \mathcal{M}_i)\;\sim\;{\cal N}\big(&{\bf k}(x_*,{\bf x})^\top
+[K+\sigma_{\rm noise}^2I]^{-1}{ \bf y},\\
+&k(x_*,x_*)+\sigma_{\rm noise}^2-{\bf k}(x_*,{\bf x})^\top
+[K+\sigma_{\rm noise}^2I]^{-1}{\bf k}(x_*,{\bf x})\big).
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Prior and Posterior}
+
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[width=0.45\textwidth]{priorpost} &
+{\includegraphics[width=0.45\textwidth]{priorpost1}}
+\end{tabular}
+\end{center}
+
+Predictive distribution:
+\[
+\begin{split}
+p(y_*|x_*,{\bf x},{\bf y})\;\sim\;{\cal N}\big(&{\bf k}(x_*,{\bf x})^\top
+[K+\sigma_{\rm noise}^2I]^{-1}{ \bf y},\\
+&k(x_*,x_*)+\sigma_{\rm noise}^2 - {\bf k}(x_*,{\bf x})^\top 
+[K+\sigma_{\rm noise}^2I]^{-1}{\bf k}(x_*,{\bf x})\big)
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Some interpretation}
+
+Recall our main result:
+\[
+\begin{split}
+f_*|x_*,\bfx,{\bf y}\;\sim\; {\cal N}\big(&\Blue{K(x_*,\bfx)
+[K(\bfx,\bfx)+\sigma_\mathrm{noise}^2I]^{-1}{\bf y},}\\
+&\Red{K(x_*,x_*)-K(x_*,\bfx)[K(\bfx,\bfx)+\sigma_\mathrm{noise}^2I]^{-1}K(\bfx,x_*)}\big).
+\end{split}
+\]
+The \Blue{mean} is linear in two ways:
+\[
+\mu(x_*)\;=\;\Blue{k(x_*,\bfx)[K(\bfx,\bfx)+\sigma_\mathrm{noise}^2I]^{-1}{\bf y}}
+\;=\;\sum_{n=1}^N\beta_n y_n\;=\;
+\sum_{n=1}^N\alpha_nk(x_*,x_n).
+\]
+The last form is most commonly encountered in the kernel literature.
+
+The \Red{variance} is the difference between two terms:
+\[
+V(x_*)\;=\;\Red{k(x_*,x_*)-{\bf k}(x_*,\bfx)
+[K(\bfx,\bfx)+\sigma_\mathrm{noise}^2I]^{-1}{\bf k}(\bfx,x_*)},
+\]
+the first term is the \emph{prior variance}, from which we subtract
+a (positive) term, telling how much the data $\bfx$ has
+explained.\\
+Note, that the variance is independent of the observed
+outputs ${\bf y}$.
+\end{frame}
+
+
+\end{document}

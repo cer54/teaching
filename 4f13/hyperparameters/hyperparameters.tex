@@ -1,0 +1,105 @@
+\input{../style.tex}
+
+\title{GP Marginal Likelihood and Hyperparameters}
+\author{Carl Edward Rasmussen}
+\date{October 13th, 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Key concepts}
+\begin{itemize}
+\item We give an interpretation of the marginal likelihood in terms of
+\begin{itemize}
+\item a data fit
+\item a complexity penalty
+\end{itemize}
+\item covariance functions can be parameterized using hyperparameters
+\item hyperparameters can be fit by optimizing the marginal likelihood
+\begin{itemize}
+\item this is a form of model selection
+\end{itemize}
+\item Occam's razor is automatic and avoids overfitting
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Gaussian process marginal likelihood}
+
+Log marginal likelihood has a closed form
+\[
+\log p({\bf y}|{\bf x},\mathcal{M}_i)\;=\;\Blue{-\frac{1}{2}{\bf y}
+^\top [K+\sigma_n^2I]^{-1}{\bf y}}
+-\Red{\frac{1}{2}\log|K+\sigma_n^2I|}-\frac{n}{2}\log(2\pi)
+\]
+and is the combination of a \Blue{data fit} term and \Red{complexity penalty}.
+Occam's Razor is automatic.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Hyperparameters and properties of covariance functions}
+
+The covariance function which we have seen before
+\[
+k(x,x')\;=\;\exp(-\tfrac{1}{2}(x-x')^2),
+\]
+encodes that $f(x)$ and $f(x')$ have large covariance if $x$ is
+\Blue{close to} $x'$, but it doesn't really quantify what is means by
+\Blue{close to}.
+
+We can parameterize the covariance function in terms of
+hyperparameters such as $\ell$, in
+\[
+k(x,x')\;=\;\exp\big(-\frac{(x-x')^2}{2\ell^2}\big).
+\]
+
+\Blue{Learning} in Gaussian process models involves finding
+\begin{itemize}
+\item the form of the covariance function, and
+\item any unknown (hyper-) parameters $\theta$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Fitting the length scale parameter}
+
+Parameterized covariance function: $k(x,x') =
+v^2\exp\big(-\displaystyle\frac{(x-x')^2}{2\ell^2}\big)
++\sigma_\mathrm{noise}^2\delta_{xx'}$.
+\vskip-6mm
+\includegraphics[width=\textwidth]{longshort2}
+\vskip-4mm
+The mean posterior predictive function is plotted for 3 different
+length scales (the blue curve corresponds to optimizing the marginal
+likelihood). \Red{Notice, that an almost exact fit to the data can be
+achieved by reducing the length scale -- but the marginal likelihood
+does not favour this!}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How can Bayes rule help find the right model complexity? 
+  Marginal likelihoods and Occam's Razor}
+\centerline{\includegraphics[width=0.85\textwidth]{ockham}}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{An illustrative analogous example}
+Imagine the simple task of fitting the variance, $\sigma^2$, of a zero-mean
+Gaussian to a set of $n$ scalar observations.
+
+\centerline{\includegraphics[width=0.6\textwidth]{sgex}}
+
+The log likelihood is $\log p(\bfy|\mu,\sigma^2) =
+\Blue{-\tfrac{1}{2}{\bf y}^\top I{\bf y}/\sigma^2} \Red{-\tfrac{1}{2}\log|I\sigma^2|}-
+\tfrac{n}{2}\log(2\pi)$ 
+
+\end{frame}
+\end{document}

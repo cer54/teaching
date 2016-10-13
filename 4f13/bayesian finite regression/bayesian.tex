@@ -1,8 +1,8 @@
 \input{../style.tex}
 
-\title{Bayesian inference and prediction with finite regression models}
+\title{Bayesian inference and prediction\\ in finite regression models}
 \author{Carl Edward Rasmussen}
-\date{July 1st, 2016}
+\date{October 13th, 2016}
 
 \begin{document}
 
@@ -13,69 +13,25 @@
 \begin{frame}
 \frametitle{Key concepts}
 
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Posterior probability of a function}
-
-Given the \Blue{prior}  functions \Blue{$p(\bff)$} how can we make predictions?
+Bayesian inference in finite, parametric models
 \begin{itemize}
-\item Of all functions generated from the prior, keep those that fit the data.
-\item The notion of closeness to the data is given by the \Red{likelihood $p(\bf
-y|\bff)$}.
-\item We are really interested in the posterior distribution over functions:
-%
-\[
-\Green{p(\bff|\bfy)}\;=\;\frac{\Red{p(\bfy|\bff)}\,\Blue{p(\bff)}}{\Cyan{p(\bfy)
-}}
-{\; \; \; \; \; \;} \mathrm{Bayes\; Rule}
-\]
-%
+\item we contrast \Red{maximum likelihood} with \Blue{Bayesian
+    inference}
+\item when both prior and likelihood are Gaussian, all calculations
+  are tractable
+\begin{itemize}
+\item the posterior on the parameters is Gaussian
+\item the predictive distribution is Gaussian
+\item the marginal likelihood is tractable
 \end{itemize}
-
-\parbox{0.45\textwidth}{
-\centerline{\includegraphics[width=0.45\textwidth]{random_polynomials_degree17.pdf}}
-\centerline{Some samples from the prior}
-}
-\parbox{0.45\textwidth}{
-\centerline{\includegraphics[width=0.45\textwidth]{samples_posterior_degree17.pdf}}
-\centerline{Samples from the posterior}
-}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Priors on parameters induce priors on functions}
-
-A model $\mathcal{M}$ is the choice of a \Red{model structure} and of \Blue{para
-meter values}.  
-%
-\[
-f_\bfw(x)\; =\; \sum_{m=0}^{\Red{M}} \Blue{w_m}\,\Red{\phi_m(x)}
-\]
-%
-The prior $p(\bfw|\mathcal{M})$ determines what \Blue{functions} this model can generate. Example: \vspace*{-1.5ex}
+\item we observe the contrast
 \begin{itemize}
-\item Imagine we choose $M=17$, and $p(w_m)=\N(w_m;\;0, \sigma_\bfw^2)$.
-\item We have actually defined a \Blue{prior distribution over functions $p(\bff|\mathcal{M})$}.
-\end{itemize} \vspace*{-1.5ex}
-
-\parbox{0.49\textwidth}{
-This figure is generated as follows:
-\begin{itemize}
-\item Use polynomial basis functions, $\phi_m(x)=x^m$.
-\item Define a uniform grid of $n=100$ values in $x$ from $[-1.5, 2]$.
-\item Generate matrix $\bPhi$ for $M=17$.
-%\texttt{Phi = repmat(x,1,M+1).\^{}repmat(0:M,N,1);}
-\item Draw $w_m\sim{\cal N}(0,1)$.
-\item Compute and plot $\bff=\bPhi_{n\times 18}\,\bfw$.
+\item in maximum likelihood the data fit gets better with larger
+  models (overfitting)
+\item the marginal likelihood prefers an intermediate model size
+  (Occam's Razor)
 \end{itemize}
-}
-\parbox{0.45\textwidth}{
-\centerline{\includegraphics[width=0.5\textwidth]{random_polynomials_degree17.pdf}}
-}
-
+\end{itemize}
 \end{frame}
 
 
@@ -152,7 +108,7 @@ Make predictions, by plugging in the ML estimate:
 
 
 \begin{frame}
-\frametitle{Bayesian inference, parametric model, cont.}
+\frametitle{Bayesian inference, parametric model}
 
 Posterior parameter distribution by Bayes rule ({\small $\Green{p(a|b)}=\Blue{p(a)} \Red{p(b|a)}/\Cyan{p(b)}$}):
 \[
@@ -169,6 +125,11 @@ p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;&=\;
 \end{split}
 \]
 
+Marginal likelihood:
+\[
+\Cyan{p({\bf y}|{\bf x},\mathcal{M})}\;=\;
+\int \Blue{p({\bf w}|\bfx,\mathcal{M})}  \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d{\bf w}
+\]
 \end{frame}
 
 
@@ -198,10 +159,65 @@ $\Red{p(\bfy|\bfx,\bfw,\mathcal{M}})=\N(\bfy;\;\bPhi\,\bfw,\,\sigma_\mathrm{nois
 
 The predictive distribution is given by:
 \[
-p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;=\;
-\N(y_*;\; \bphi(x_*)^\top\bmu,\,\bphi(x_*)^\top\bSigma\bphi(x_*)+\sigma_\mathrm{noise}^2)
+\begin{split}
+p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;&=\;\int
+\Red{p(y_*|{\bf w},x_*,\mathcal{M})}\Green{p({\bf w}|{\bf x}, {\bf y},\mathcal{M})}d{\bf w}\\
+&=\;\N(y_*;\; \bphi(x_*)^\top\bmu,\,\bphi(x_*)^\top\bSigma\bphi(x_*)+\sigma_\mathrm{noise}^2).
+\end{split}
 \]
+\end{frame}
 
+
+\begin{frame}
+\frametitle{Multiple explanations of the data}
+
+\vskip 1.5mm
+\centerline{\includegraphics[width=0.6\textwidth]{polynomial_deg3_predictive_dist_and_post_samples}}
+
+Remember that a finite linear model $f(x_n)=\bphi(x_n)^\top\bfw$ with prior on the weights 
+$p(\bfw)=\N(\bfw;\; \mathbf{0}, \sigma_\bfw^2 \bfI)$ has a posterior distribution
+\[
+\Green{p({\bf w}|{\bf x},{\bf y},\mathcal{M})}\;=\;\N(\bfw;\;\bmu,\,\bSigma)
+\mathrm{\; \; \; with \; \; \;}
+\begin{array}{l}
+\bSigma\;=\;\left(\sigma_\mathrm{noise}^{-2}\bPhi^\top\bPhi+ \sigma_\bfw^{-2}\right)^{-1}\\
+\bmu\;=\;\Big(\bPhi^\top\bPhi+ \frac{\sigma_\mathrm{noise}^2}{\sigma_\bfw^2}\,I\Big)^{-1}\bPhi^\top\bfy
+\end{array}
+\]
+and predictive distribution
+\[
+p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;=\;
+\N(y_*;\; \bphi(x_*)^\top\bmu,\,\bphi(x_*)^\top\bSigma\bphi(x_*)+\sigma_\mathrm{noise}^2\,\bfI)
+\]
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Marginal likelihood (Evidence) of our polynomials}
+
+Marginal likelihood, or ''evidence'' of a finite linear model:
+\[
+\begin{split}
+\Cyan{p({\bf y}|{\bf x},\mathcal{M})}\;&=\;
+\int \Blue{p({\bf w}|\bfx,\mathcal{M})}
+\Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d{\bf w}\\
+&=\;\N(\bfy;\;\mathbf{0},\sigma_\bfw^2\,\bPhi\,\bPhi^\top+\sigma_\mathrm{noise}^2\,\bfI).
+\end{split}
+\]
+Luckily for Gaussian noise there is a closed-form analytical solution!
+%
+\parbox{0.5\textwidth}{
+\centerline{\includegraphics[width=0.51\textwidth]{polynomial_evidence}}
+}
+\hfill
+\parbox{0.49\textwidth}{
+\begin{itemize}
+\item The evidence prefers $M=3$,\\ not simpler, not more complex.
+\item Too simple models consistently miss most data.
+\item Too complex models frequently miss some data.
+\end{itemize}
+}
 \end{frame}
 
 \end{document}
