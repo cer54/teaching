@@ -129,9 +129,9 @@ ${\cal X} \times {\cal X}$
 \frametitle{The marginalization property}
 
 Thinking of a GP as a Gaussian distribution with an infinitely long mean vector
-and an infinite by infinite covariance matrix may seem impractical\ldots
+and an infinite by infinite covariance matrix may seem impractical\ldots\\[1ex]
 
-\ldots luckily we are saved by the \emph{marginalization property}:
+\ldots luckily we are saved by the \emph{marginalization property}:\\[1ex]
 
 Recall:
 \[
@@ -143,8 +143,12 @@ For Gaussians:
 p(\bfx,\bfy)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}
 \end{array}\!\Big],
 \;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big)
-\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}({\bf a},\;A)
+\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}({\bf a},\;A),
 \]
+which works \Red{irrespective} of the size of $\bfy$.\\[1ex]
+
+\Blue{Key}: only ever ask finite dimensional questions about functions.
+
 \end{frame}
 
 

@@ -42,7 +42,7 @@ Occam's Razor is automatic.
 
 
 \begin{frame}
-\frametitle{Hyperparameters and properties of covariance functions}
+\frametitle{Hyperparameters: properties of covariance functions}
 
 The covariance function which we have seen before
 \[
@@ -50,10 +50,9 @@ k(x,x')\;=\;\exp(-\tfrac{1}{2}(x-x')^2),
 \]
 encodes that $f(x)$ and $f(x')$ have large covariance if $x$ is
 \Blue{close to} $x'$, but it doesn't really quantify what is means by
-\Blue{close to}.
+\Blue{close to}?\\[1ex]
 
-We can parameterize the covariance function in terms of
-hyperparameters such as $\ell$, in
+We can parameterize the covariance function using \Blue{hyperparameters} such as $\ell$, in
 \[
 k(x,x')\;=\;\exp\big(-\frac{(x-x')^2}{2\ell^2}\big).
 \]
@@ -72,7 +71,7 @@ k(x,x')\;=\;\exp\big(-\frac{(x-x')^2}{2\ell^2}\big).
 Parameterized covariance function: $k(x,x') =
 v^2\exp\big(-\displaystyle\frac{(x-x')^2}{2\ell^2}\big)
 +\sigma_\mathrm{noise}^2\delta_{xx'}$.
-\vskip-6mm
+\vskip-4mm
 \includegraphics[width=\textwidth]{longshort2}
 \vskip-4mm
 The mean posterior predictive function is plotted for 3 different

@@ -65,8 +65,8 @@ inference using Gaussian processes</h2>
 prediction with finite regression models</a>
 <ul>
   <li>Likelihood and prior</li>
-  <li>Posterior and predictive distribution, pictorially</li>
-  <li>Posterior algebra</li>
+  <li>Posterior and predictive distribution, with algebra and pictorially</li>
+  <li>the marginal likelihood</li>
 </ul>
 </li>
 
@@ -85,42 +85,59 @@ Gaussian and Matrix equations</a>
 <ul>
   <li>Bayesian model selection</li>
   <li>MCMC based explanation of how the marginal likelihood works</li>
-  <li>Average the likelihood over the prior: example with polynomials</li>
+  <li>Average the likelihood over the prior: example</li>
 </ul>
 </li>
     
 <li><a href="parameters and functions.pdf">Distributions over
 parameters and over functions</a>
 <ul>
-  <li>Motivation: representation of multiple hypotheses</li>
   <li>Concept of prior over functions and over parameters</li>
-  <li>Inference</li>
-  <li>Priors over functions are priors over long vectors</li>
+  <li>nuissance parameters
+  <li>Could we sidestep parameters, and work directly with functions?</li>
 </ul>
 </li>
 
 <li><a href="gaussian process.pdf">Gaussian process</a>
 <ul>
   <li>From scalar Gaussians to multivariate Gaussians to Gaussian processes</li>
-  <li>Marginal and conditional</li>
+  <li>Functions are like infinitely long vectors, GPs are
+  distributions over functions</li>
+  <li>Marginal and conditional Gaussian</li>
   <li>GP definition</li>
   <li>Conditional generation and joint generation</li>
 </ul>
 </li>
 
-<li>Gaussian processes and data
+<li><a href="gp and data.pdf">Gaussian processes and data</a>
 <ul>
   <li>In pictures: prior and posterior</li>
   <li>In algebra: prior and posterior</li>
   <li>An analytic marginal likelihood, and some intuition</li>
-  <li>Desirable properties of priors over functions (idea: write down
-     the "telescopic" products of conditionals expansion, and realize
-     that you cannot really do anything without marginalization)</li>
 </ul>
 </li>
 
-<li>Linear in the parameters models are particular case GPs
+<li><a href="hyperparameters.pdf">Gaussian process marginal likelihood
+and hyperparameters</a>
 <ul>
+  <li>the GP marginal likelihood, and it interpretation</li>
+  <li>hyperparameters can control the properties of functions</li>
+  <li>example: finding hyperparameters by maximizing the marginal
+  likelihood</li>
+  <li>Occam's Razor</li>
+</ul>
+</li>  
+
+<li><a href="correspondence.pdf">Correspondence between Linear in the
+parameters models and GPs</a></li>
+<ul>
+  <li>From linear in the parameters models to GPs</li>
+  <li>From GPs to linear in the parameters models</li>
+  <li>Computational considerations: which is more efficient?</li>
+</ul>
+</li>
+
+<li>Other GPs</li>
   <li>From infinite linear models to GPs: the Gaussian RBF case</li>
   <li>From infinite linear models to GPs: the infinite NN case (w/o proof)</li>
   <li>Splines are GPs</li>

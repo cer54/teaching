@@ -13,17 +13,18 @@
 \begin{frame}
 \frametitle{Key concepts}
 \begin{itemize}
-\item We give an interpretation of the marginal likelihood in terms of
+\item Linear in the parameters model correspond to Gaussian processes
+\item explicitly calculate the GP from the linear model
 \begin{itemize}
-\item a data fit
-\item a complexity penalty
+\item mean function
+\item covaraince function
 \end{itemize}
-\item covariance functions can be parameterized using hyperparameters
-\item hyperparameters can be fit by optimizing the marginal likelihood
+\item going from covariance function to linear model
 \begin{itemize}
-\item this is a form of model selection
+\item done using Mercer's theorem
+\item may not always result in a \Red{finite} linear model
 \end{itemize}
-\item Occam's razor is automatic and avoids overfitting
+\item computational consideration: which is best?
 \end{itemize}
 \end{frame}
 
@@ -45,10 +46,13 @@ and covariance function:
 \begin{split}
 k(x,x')\;=&\;E[(f(x)-0)(f(x')-0)]\;=\;\int\!\int
 (ax+b)(ax'+b)p(a)p(b)dadb\\
-=&\;\int a^2xx'p(a)da+\int b^2p(b)db+(x+x')\int abp(a)p(b)dadb
+=&\;\int a^2xx'p(a)da+\int b^2p(b)db+(x+x')\int ap(a)p(b)dadb
 =\alpha xx'+\beta.
 \end{split}
 \]
+
+Therefore: a linear model with Gaussian random parameters corresponds to a GP
+with covariance function $k(x,x')=\alpha xx'+\beta$.
 \end{frame}
 
 
@@ -62,7 +66,7 @@ p(\bfw)=\N(\bfw;\; \mathbf{0}, A)
 \]
 %
 The joint distribution of any $\bff=[f(x_1),\ldots,f(x_N)]^\top$ is a
-multivariate Gaussian -- this looks like a Gaussian Process!
+multivariate Gaussian -- this looks like a Gaussian Process!\\[1ex]
 
 The prior $p(\bff)$ is fully characterized by the \Blue{\it mean} and \Red{\it covariance} 
 functions.
@@ -120,16 +124,18 @@ $k(x_i,x_j)=\sigma_\bfw^2 \sum_{k=1}^M \phi_k(x_i)\phi_k(x_j)=\sigma_\bfw^2\bphi
 \frametitle{GPs and Linear in the parameters models are equivalent}
 
 We've seen that a Linear in the parameters model, with a Gaussian prior on
-the weights is also a GP.
+the weights is also a GP.\\[1ex]
+
+Might it also be the case that every GP corresponds to a Linear in the 
+parameters model?\\[1ex]
+
+The answer is \Red{yes, but not necessarily a finite one}. \hfill (Mercer's theorem.)\\[1ex] 
 
 Note the different computational complexity: GP: ${\cal O}(N^3)$,
 linear model ${\cal O}(NM^2)$ where $M$ is the number of basis
-functions and $N$ the number of training cases.
+functions and $N$ the number of training cases.\\[1ex]
 
 So, which representation is most efficient?
-
-Might it also be the case that every GP corresponds to a Linear in the
-parameters model?\hfill (Mercer's theorem.)
 \end{frame}
 
 \end{document}

@@ -11,6 +11,32 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{Key concepts}
+
+\begin{itemize}
+\item Should we use finite or infinite models?
+\item GPs are a fancy way of using infinite models, but
+\begin{itemize}
+\item \Blue{will it actually make any difference in practise?}
+\end{itemize}
+\item finite models correspond to much stronger assumptions about the data
+\item therefore, we don't want to use finite models
+\item a GP with squared exponential covariance function corresponds to
+  an infinite linear in the parameters model with Gaussian bumps
+  \Red{everywhere}
+\item illustrate the difference\\[2ex]
+\end{itemize}
+
+
+
+\Blue{Cromwell's dictum}\\
+\emph{I beseech you, in the bowels of Christ, consider it possible that you are
+  mistaken}\\
+\mbox{}\hfill --- Oliver Cromwell, 1650
+\end{frame}
+
+
+\begin{frame}
 \frametitle{From infinite linear models to Gaussian processes}
 
 Consider the class of functions (sums of squared exponentials):
@@ -55,8 +81,6 @@ Gaussian process with infinitely many localized basis functions
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M1.pdf}
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M2.pdf}
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M3.pdf}
-
-
 \end{frame}
 
 \begin{frame}
@@ -72,14 +96,11 @@ Gaussian process with infinitely many localized basis functions
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M4.pdf}
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M5.pdf}
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M6.pdf}
-
-
 \end{frame}
 
 
 \begin{frame}
 \frametitle{\!\!\!Using finitely many basis functions may be dangerous!(3)}
-
 
 Finite linear model with 5 localized basis functions)
 
@@ -91,9 +112,6 @@ Gaussian process with infinitely many localized basis functions
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M7.pdf}
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M12.pdf}
 \includegraphics[width=0.33\textwidth]{seq_fullGP_M20.pdf}
-
-
 \end{frame}
-
 
 \end{document}
