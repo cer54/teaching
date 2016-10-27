@@ -1,0 +1,147 @@
+\input{../style.tex}
+
+\title{Gibbs Sampling}
+\author{Carl Edward Rasmussen}
+\date{October 28th, 2016}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Key concepts}
+
+\begin{itemize}
+\item bla
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How do we do integrals wrt an intractable posterior?}
+
+Approximate \Blue{expectations} of a function $\phi(\bfx)$ wrt
+\Blue{probability} $p(\bfx)$:
+\[
+\E_{p(x)}[\phi(x)]\;=\;\bar\phi\;=\;\int \phi(\bfx)\Red{p(\bfx)}d\bfx,
+\text{\ \ where\ \ }\bfx\in\R^D,
+\]
+when these are not analytically tractable, and typically $D\gg1$.
+\begin{center}
+\includegraphics[width=0.7\textwidth]{mc0}
+\end{center}
+Assume that we can evaluate $\phi(x)$ and $\Red{p(x)}$.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Numerical integration on a grid}
+
+Approximate the integral by a sum of products
+\[
+\int \phi(\bfx)\Red{p(\bfx)}d\bfx\;\simeq\;\sum_{\tau=1}^T\phi(\bfx^{(\tau)})\Red{p(\bfx^{(\tau)})}\Delta\bfx,
+\]
+where the $\bfx^{(\tau)}$ lie on an equidistant grid (or fancier
+versions of this).
+
+\centerline{\includegraphics[width=0.7\textwidth]{mc1}}
+
+\Blue{Problem:} the number of grid points required, $k^D$, grows
+exponentially with the dimension $D$. Practicable only to $D=4$ or so.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Monte Carlo}
+
+The fundamental basis for Monte Carlo approximations is
+\[
+\E_{\Red{p(x)}}[\phi(\bfx)]\;\simeq\;\hat\phi\;=\;\frac{1}{T}\sum_{\tau=1}^T\phi(\bfx^{(\tau)}),
+\text{\ \ where\ \ }\bfx^{(\tau)}\sim \Red{p(\bfx)}.
+\]
+
+\centerline{\includegraphics[width=0.7\textwidth]{mc4}}
+
+Under mild conditions, $\hat\phi\rightarrow\E[\phi(\bfx)]$ as
+$T\rightarrow\infty$. For moderate $T$, $\hat\phi$ may still be a good
+approximation. In fact it is an \emph{unbiased} estimate with
+\[
+\V[\hat\phi]\;=\;\frac{\V[\phi]}{T}, \text{\ \ where\ \ }
+\V[\phi]\;=\;\int \big(\phi(\bfx)-\bar\phi\big)^2\Red{p(\bfx)}d\bfx.
+\]
+\Blue{Note}, that this variance is \Blue{\emph{independent}} of the dimension
+$D$ of $\bfx$.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo}
+
+This is great, but \Blue{how do we generate random samples} from
+$\Red{p(\bfx)}$?
+
+If $\Red{p(\bfx)}$ has a standard form, we may be
+able to generate \Blue{\emph{independent}} samples.
+
+\underline{Idea:} could we design a Markov Chain,
+$\Blue{q(\bfx'|\bfx)}$, which generates (dependent) samples from the
+desired distribution $\Red{p(\bfx)}$?
+\[
+\bfx \rightarrow \bfx' \rightarrow \bfx'' \rightarrow  \bfx'''
+\rightarrow \ldots
+\]
+
+
+One such algorithm is called \Blue{\emph{Gibbs sampling}}: for each
+component $i$ of $\bfx$ in turn, sample a new value from the
+conditional distribution of $x_i$ given all other variables:
+\[
+x_i'\;\sim\;p(x_i|x_1,\ldots,x_{i-1},x_{i+1},\ldots,x_D).
+\]
+It can be shown, that this will eventually generate dependent samples from the 
+joint distribution $\Red{p(\bfx)}$.
+
+Gibbs sampling reduces the task of sampling from a joint distribution,
+to sampling from a sequence of univariate conditional distributions.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Gibbs sampling example: Multivariate Gaussian}
+
+20 iterations of Gibbs sampling on a bivariate Gaussian; both
+conditional distributions are Gaussian.
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{bvg-gibbs}
+\end{center}
+
+Notice that \Blue{strong correlations} can \Blue{slow down} Gibbs sampling.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Gibbs Sampling}
+
+Gibbs sampling is a parameter free algorithm, applicable if we know
+how to sample from the conditional distributions.
+
+{\bf Main disadvantage:} depending on the target distribution, there may be
+very strong correlations between consecutive samples.
+
+To get less dependence, Gibbs sampling is often run for a long time,
+and the samples are thinned by keeping only every 10th or 100th
+sample.
+
+It is often challenging to judge the \emph{effective correlation
+  length} of a Gibbs sampler. Sometimes several Gibbs samplers are run
+from different starting points, to compare results.
+\end{frame}
+
+
+\end{document}
