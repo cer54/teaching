@@ -33,6 +33,7 @@
 
 \title[The EM algorithm]{The Expectation Maximization\\ or EM algorithm}
 \author{Carl Edward Rasmussen}
+\date{November 18th, 2016}
 
 \begin{document}
 
@@ -43,12 +44,14 @@
 
 \begin{frame}
 \frametitle{Contents}
-notation, objective\\
-the lower bound functional, ${\cal F}(q(H),\theta)$\\
-the EM algorithm\\
-example: Gaussian mixture model\\
-example: Factor Analysis\\
-Appendix: KL divergence
+
+\begin{itemize}
+\item notation, objective
+\item the lower bound functional, ${\cal F}(q(H),\theta)$
+\item the EM algorithm
+\item example: Gaussian mixture model
+\item Appendix: KL divergence
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -109,6 +112,15 @@ Although the steps work with the lower bound, each iteration cannot decrease the
 \]
 \end{frame}
 
+
+\begin{frame}
+\frametitle{EM as Coordinate Ascent in ${\cal F}$}
+
+\centerline{\includegraphics[width=100mm]{fqtheta}}
+\end{frame}
+
+
+
 \begin{frame}
 \frametitle{Example: Mixture of Gaussians}
 
@@ -145,15 +157,27 @@ The M step, optimizing $\Blue{{\cal F}(q(\z),\theta)}$ wrt the parameters, $\the
 \frac{\partial\Blue{{\cal F}}}{\partial\sigma^2_j}\;=\;
 \sum_{i=1}^n\!q(\z_i=j)\big[\frac{(\y_i-\mu_j)^2}{2\sigma_j^4}-\frac{1}{2\sigma_j^2}\big]=0
 \;\Rightarrow\;\sigma_j^2&=\frac{\sum_{i=1}^n\!q(\z_i=j)(\y_i-\mu_j)^2}{\sum_{i=1}^n\!q(\z_i=j)},\\
-\frac{\partial[\Blue{{\cal F}}+\lambda(1-\sum_{j=1}^k\pi_j]}{\partial\pi_j}&\;=\;
+\frac{\partial[\Blue{{\cal F}}+\lambda(1-\sum_{j=1}^k\pi_j)]}{\partial\pi_j}=0
+\;\Rightarrow\;\pi_j&=\frac{1}{n}\sum_{i=1}^n\!q(\z_i=j),
 \end{split}
 \]
+%
+which have nice interpretations in terms of \Blue{weighted averages}.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Clustering with MoG}
+
+\centerline{\includegraphics[height=0.85\textheight]{mog-cluster-data}}
 \end{frame}
 
 \begin{frame}
-\frametitle{Example: Factor Analysis}
+\frametitle{Clustering with MoG}
 
+\centerline{\includegraphics[height=0.85\textheight]{mog-cluster-ellipses}}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Appendix: some properties of KL divergence}

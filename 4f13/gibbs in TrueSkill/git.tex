@@ -1,0 +1,166 @@
+\input{../style.tex}
+
+\title{Gibbs sampling in TrueSkill}
+\author{Carl Edward Rasmussen}
+\date{October 28th, 2016}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Key concepts}
+
+\begin{itemize}
+\item In TrueSkill the joint distribution is intractable
+\item however, both the 
+\begin{itemize}
+\item performance differences given skills, and
+\item skills given performances
+\end{itemize}
+are tractable.
+\item we derive the Gibbs sampling updates in detail.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Gibbs sampling for the TrueSkill model}
+
+We have $g=1,\ldots,G$ games where $I_g$: id of Player 1 and $J_g$:
+id of Player 2.\\ The outcome of game $g$ is $y_g=+1$ if $I_g$ wins, $y_g=-1$ if $J_g$ wins.\\[1ex]
+
+Gibbs sampling alternates between sampling skills
+$\bfw=[w_1,\ldots,w_M]^\top$ conditional on fixed performance
+differences $\bft=[t_1,\ldots,t_N]^\top$, and sampling $\bft$
+conditional on fixed $\bfw$.
+\begin{enumerate}
+\item Initialise $\bfw$, e.g.\ from the prior $p(\bfw)$.
+\item Sample the \Blue{\emph{performance differences}} from their
+  conditional posteriors
+\[
+\Blue{p(t_g|w_{I_g}, w_{J_g},y_g)}\;\propto\;
+\delta(y_g-\operatorname{sign}(t_g))\N(t_g; w_{I_g}-w_{J_g}, 1)
+\]
+\item Jointly sample the \Red{\emph{skills}} from the conditional posterior 
+\[
+\Red{p(\bfw|\bft,\bfy)}\;=\;\underbrace{\Red{p(\bfw|\bft)}}_{\N(\bfw; \mu, \Sigma)}
+\propto 
+\underbrace{p(\bfw)}_{\N(\bfw; \mu_0, \Sigma_0)}
+\prod_{g=1}^G 
+\underbrace{p(t_g|w_{I_g}, w_{J_g})}_{\propto\;\N(\bfw; \mu_g, \Sigma_g)}
+\]
+\item Go back to step 2.
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Gaussian identities}
+
+The distribution for the performance is both Gaussian in $t_g$ and
+proportional to a Gaussian in $\bfw$
+\[
+\begin{split}
+p(t_g|w_{I_g}, w_{J_g})\;&\propto\;\exp\big(-\tfrac{1}{2}(w_{I_g}- w_{J_g}-t_g)^2\big)\\
+&\propto\;\N\Big(-\tfrac{1}{2}
+\big(\begin{array}{c}
+w_{I_g}-\mu_1\\
+w_{J_g}-\mu_2
+\end{array}\big)^\top
+\Big[\begin{array}{r r}
+1 & -1\\
+-1 & 1
+\end{array}\Big]
+\big(\begin{array}{c}
+w_{I_g}-\mu_1\\
+w_{J_g}-\mu_2
+\end{array}\big)
+\Big)
+\end{split}
+\]
+with $\mu_1 - \mu_2 = t_g$. Notice that
+\[
+\Big[\begin{array}{r r}
+1 & -1\\
+-1 & 1
+\end{array}\Big]
+\big(\begin{array}{c}
+\mu_1\\
+\mu_2
+\end{array}\big)
+=
+\big(\begin{array}{r}
+t_g\\
+-t_g
+\end{array}\big)
+\]
+
+Remember that for products of Gaussians precisions add up, and means
+ weighted by precisions (natural parameters) also add up:
+\[
+\N(\bfw; \mu_a, \Sigma_a)\N(\bfw; \mu_b, \Sigma_b) = z_c \;
+\N\big(\bfw; \mu_c,
+\Sigma_c \big)
+\]
+where $\Sigma_c^{-1} = \Sigma_a^{-1}+\Sigma_b^{-1}$ and $\mu_c = \Sigma_c (\Sigma_a^{-1}\mu_a+\Sigma_b^{-1}\mu_b)$.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Conditional posterior over skills given performances}
+
+We can now compute the covariance and the mean of the conditional posterior.
+\[
+\Blue{\Sigma^{-1}} = \Sigma_0^{-1} + 
+\Green{\underbrace{\sum_{g=1}^G \Sigma_g^{-1}}_{\tilde\Sigma^{-1}}} 
+\;\;\;\;\;\;\;\;\;\;\;
+\mu = \Blue{\Sigma}\big(\Sigma_0^{-1}\mu_0 + 
+\Red{\underbrace{\sum_{g=1}^G\Sigma_g^{-1}\mu_g}_{\tilde\mu}}\big),
+\]
+where each game precision $\Green{\Sigma_g^{-1}}$ contain only 4
+non-zero entries. The combined precision is:
+\[
+\begin{split}
+\Green{[\tilde\Sigma^{-1}]_{ii}} 
+&= \sum_{g=1}^G \delta(i-I_g)+\delta(i-J_g)\\
+\Green{[\tilde\Sigma^{-1}]_{i\neq j}} 
+&= - \sum_{g=1}^G \delta(i-I_g)\delta(j-J_g) + \delta(i-J_g)\delta(j-I_g),  
+\end{split}
+\]
+and for the mean we have
+\[
+\Red{\tilde\mu_i}\;=\;\sum_{g=1}^G t_g\big(\delta(i-I_g)-\delta(i-J_g)\big).
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementing Gibbs sampling for the TrueSkill model}
+
+we have derived the conditional distribution for the \Blue{performance
+  differences} in game $g$ and for the \Red{skills}. These are:
+\begin{itemize}
+\item the posterior conditional \Blue{performance difference} for $t_g$ is a
+  univariate truncated Gaussian. How can we sample from it?
+\begin{itemize}
+\item by rejection sampling from a Gaussian, or
+\item by the inverse transformation method (passing a uniform on an
+  interval through the inverse cumulative distribution function).
+\end{itemize}
+\item the conditional \Red{skills} can be sampled jointly form the
+  corresponding Gaussian (using the cholesky factorization of the
+  covariance matrix).
+\end{itemize}
+
+Once samples have been drawn from the posterior, these can be used to
+make predictions for game outcomes, using the generative model.\\
+\hfill\Blue{\emph{How would you do this?}}
+\end{frame}
+
+
+\end{document}

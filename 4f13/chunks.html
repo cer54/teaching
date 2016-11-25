@@ -147,24 +147,64 @@ parameters models and GPs</a></li>
 </ul>
 </li>
 
-<li>The gpml toolbox
+<li>The <a href="http://gaussianprocess.org/gpml/code">gpml toolbox</a>
 </li>
 
 </ol>
 
 <h2><a name="rank"></a>Part II: Ranking</h2>
 
-<ol start="17">
+<ol start="15">
 <li><a href="ranking.pdf">Ranking: motivation and tennis example</a>
 <ul>
   <li>Competition in sports and games (TrueSkill problem, match making)</li>
   <li>Tennis: the ATP ranking system explained</li>
   <li>Shortcomings: what does one need to make actual predictions?
   (who wins?)</li>
+  <li>The TrueSkill ranking model</li>
 </ul>
 </li>
 
-<li>The TrueSkill ranking model
+<li><a href="gibbs sampling.pdf">Gibbs sampling</a>
+<ul>
+  <li>Calulating integrals using sampling</li>
+  <li>Markov chains and invariant distributions</li>
+  <li>Gibbs sampling</li>
+</ul>
+</li>
+
+<li><a href="gibbs in TrueSkill.pdf">Gibbs sampling in TrueSkill</a>
+<ul>
+  <li>Conditional distributions in TrueSkill are tractable</li>
+</ul>
+</li>
+
+<li>Representing distributions using <a href="factor graphs.pdf">
+factor graphs</a>
+<ul>
+  <li>the cost of computing marginal distributions</li>
+  <li>algebraic and graphical representations</li>
+  <li>local computations on the graph</li>
+  <li>message passing: the sum-product rules</li>
+</ul>
+</li>
+
+<li><a href="message in TrueSkill.pdf">message passing in
+TrueSkill</a>
+<ul>
+  <li>messages are not all tractable</li>
+</ul>
+</li>
+
+<li>Approximate messages using <a href="moment matching.pdf">moment
+matching</a>
+<ul>
+  <li>How to approximate a step function by a Gaussian?</li>
+</ul>
+</li>
+
+<!--
+<li>other issues
 <ul>
   <li>Change: get rid of variable 's' (difference of skills)</li>
   <li>Generative model with known skills</li>
@@ -207,47 +247,68 @@ parameters models and GPs</a></li>
   p(w|t,y) = p(w|t).</li>
 </ul>
 </li>
+-->
 
 </ol>
 
 <h2><a name="text"></a>Part III: Modeling text</h2>
 
 <ol start="33">
-<li>Discrete distributions over binary variables (tossing coins)
+<li><a href="text.pdf">Modeling text</a></li>
 <ul>
-  <li>Philosophical discussion about coins and priors</li>
-  <li>Distributions on probabilities</li>
-  <li>Bernoulli, binomial, Beta</li>
-  <li>Sequences of throws: difference between discrete distribution
-       		    	    and Binomial distribution</li>
-  <li>Bayes rule for discrete-Beta models</li>
+  <li>Modeling collections of documents</li>
+  <li>probabilistic models of text</li>
+  <li>Bag of words models</li>
+  <li>Zipf's law</li>
 </ul>
-</li>
 
-<li>Models of text
-<ul>Problem setting: how to model documents?
-  <li>Example: NIPS corpus</li>
-  <li>Power laws on word frequencies...</li>
-  <li>Word frequencies is the maximum likelihood solution</li>
-</ul>
-</li>
-
-<li>A Bayesian model of text
+<li>Discrete distributions on <a href="binary.pdf">binary</a>
+variables (tossing coins)
 <ul>
-  <li>Posterior distributions over the probability simplex</li>
-  <li>Dirichlet distributions</li>
+  <li>Binary variables and the Bernoulli distribution</li>
+  <li>Sequences, the binomial and discrete distributions</li>
+  <li>Inference and the Beta distributinos: probabilities
+  over probabilities</li>
 </ul>
 </li>
 
-<li>Bayesian mixture of multinomials
+<li><a href="discrete.pdf">Discrete distributions</a> over multiple
+outcomes</li>
+<ul>
+  <li>multinomials, categorical and discrete distributions</li>
+  <li>inference and the Dirichlet prior</li>
+</ul>
 </li>
 
-<li><a href="expectation maximization.pdf">The Expectation
+<li><a href="document models.pdf">Document models</a></li>
+<ul>
+  <li>Categorical model</li>
+  <li>Mixture of categoricals model</li>
+  <li>Trainig mixture models with EM</li>
+  <li>A Bayesian mixture model</li>
+</ul>
+</li>
+
+<li><a href="expectation maximization.pdf">The Expectation 
 Maximization (EM) algoritm</a>
 </li>
+<ul>
+  <li>Maximum likelihood in models with latent variables</li>
+</ul>
 
-<li>LDA
+<li><a href="gibbs for Bayesian mixture.pdf">Gibbs sampling for
+Bayesian mixture model</a>
 </li>
+<ul>
+  <li>Gibbs sampling</li>
+  <li>Collapsed Gibbs sampling</li>
+</ul>
+
+<li><a href="lda.pdf">Latent Dichichlet Allocation</a> topic models</li>
+<ul>
+  <li>A more interesting topic model</li>
+  <li>Inference using Gibbs sampling</li>
+</ul>
 
 </ol>
 

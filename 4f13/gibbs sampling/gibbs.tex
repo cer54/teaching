@@ -16,7 +16,10 @@
 \frametitle{Key concepts}
 
 \begin{itemize}
-\item bla
+\item \emph{inference} requires integrating out variables
+\item Why may random sampling be useful for integration?
+\item What happens if the joint distribution is too complicated to sample from?
+\item Gibbs sampling and conditional distributions
 \end{itemize}
 
 \end{frame}
@@ -83,10 +86,10 @@ $D$ of $\bfx$.
 \frametitle{Markov Chain Monte Carlo}
 
 This is great, but \Blue{how do we generate random samples} from
-$\Red{p(\bfx)}$?
+$\Red{p(\bfx)}$?\\[1ex]
 
 If $\Red{p(\bfx)}$ has a standard form, we may be
-able to generate \Blue{\emph{independent}} samples.
+able to generate \Blue{\emph{independent}} samples.\\[1ex]
 
 \underline{Idea:} could we design a Markov Chain,
 $\Blue{q(\bfx'|\bfx)}$, which generates (dependent) samples from the
@@ -104,7 +107,7 @@ conditional distribution of $x_i$ given all other variables:
 x_i'\;\sim\;p(x_i|x_1,\ldots,x_{i-1},x_{i+1},\ldots,x_D).
 \]
 It can be shown, that this will eventually generate dependent samples from the 
-joint distribution $\Red{p(\bfx)}$.
+joint distribution $\Red{p(\bfx)}$.\\[1ex]
 
 Gibbs sampling reduces the task of sampling from a joint distribution,
 to sampling from a sequence of univariate conditional distributions.
@@ -129,18 +132,22 @@ Notice that \Blue{strong correlations} can \Blue{slow down} Gibbs sampling.
 \frametitle{Gibbs Sampling}
 
 Gibbs sampling is a parameter free algorithm, applicable if we know
-how to sample from the conditional distributions.
+how to sample from the conditional distributions.\\[1ex]
 
 {\bf Main disadvantage:} depending on the target distribution, there may be
-very strong correlations between consecutive samples.
+very strong correlations between consecutive samples.\\[1ex]
 
 To get less dependence, Gibbs sampling is often run for a long time,
 and the samples are thinned by keeping only every 10th or 100th
-sample.
+sample.\\[1ex]
+
+Burn-in: often, the initial sequence of samples is discarded, until the chain has converged to the desired distribution. \Blue{What does \emph{convergence}} mean in this context?\\[1ex]
 
 It is often challenging to judge the \emph{effective correlation
   length} of a Gibbs sampler. Sometimes several Gibbs samplers are run
-from different starting points, to compare results.
+from different starting points, to compare results.\\[1ex]
+
+
 \end{frame}
 
 
