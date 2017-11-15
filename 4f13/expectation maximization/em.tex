@@ -33,7 +33,7 @@
 
 \title[The EM algorithm]{The Expectation Maximization\\ or EM algorithm}
 \author{Carl Edward Rasmussen}
-\date{November 18th, 2016}
+\date{November 15th, 2017}
 
 \begin{document}
 
@@ -57,7 +57,7 @@
 \begin{frame}
 \frametitle{Notation}
 
-Probabilistic models may have \emph{visible} (or \emph{observed}) variables $\y$, \emph{latent} variables, (or \emph{hidden} or \emph{unobserved}  variables or \emph{missing} data) $\z$ and parameters $\theta$.
+Probabilistic models may have \emph{visible} (or \emph{observed}) variables $\y$, \emph{latent} variables, (or \emph{hidden} or \emph{unobserved}  variables or \emph{missing data}) $\z$ and parameters $\theta$.
 
 {\bf Example}: in a Gaussian mixture model, the visible variables are the observations, the latent variables are the assignments of data points to mixture components and the parameters are the means, variances, and weights of the mixture components.
 
@@ -187,7 +187,7 @@ The (asymmetric) Kullbach Leibler divergence (or relative entropy) ${\cal KL}(q(
 \frac{\delta}{\delta q(x)}\Big[\int q(x)\log\frac{q(x)}{p(x)}dx+\lambda\big(1-\int q(x)dx\big)\Big]\;
 =\;\log\frac{q(x)}{p(x)}+1-\lambda.
 \]
-Find staionary point by setting the derivative to zero:
+Find stationary point by setting the derivative to zero:
 \[
 q(x)\;=\;\exp(\lambda-1)p(x),\text{\ \ normalization conditon\ }\lambda\;=\;1, \text{\ \ so\ }q(x)\;=\;p(x),
 \]
