@@ -2,7 +2,7 @@
 
 \title{Document models}
 \author{Carl Edward Rasmussen}
-\date{November 18th, 2016}
+\date{November 15th, 2017}
 
 \begin{document}
 
@@ -10,7 +10,6 @@
 \begin{frame}
 \titlepage
 \end{frame}
-
 
 \begin{frame}
 \frametitle{Key concepts}
@@ -107,10 +106,10 @@ to the cost
 F\;=\; \sum_{m=1}^Mc_m\log \beta_m + \lambda(1-\sum_{m=1}^M\beta_m),
 \]
 %
-taking deivatives and setting to zero, we obtain
+taking derivatives and setting to zero, we obtain
 \[
 \frac{\partial F}{\partial
-  \beta_m}\;=\;\frac{c_m}{\beta_m}+\lambda\;=\;0\;\Rightarrow\;\beta_m\;=\;-\frac{c_m}{\lambda}
+  \beta_m}\;=\;\frac{c_m}{\beta_m}-\lambda\;=\;0\;\Rightarrow\;\beta_m\;=\;\frac{c_m}{\lambda}
 \text{\ \ and\ \ }
 \frac{\partial F}{\partial \lambda}\;=\;0\;\Rightarrow\;\sum_{m=1}^M\beta_m\;=\;1,
 \]
