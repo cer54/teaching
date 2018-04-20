@@ -109,6 +109,31 @@ binomial coefficient, also known as ``n choose k''.
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Naming of discrete distributions}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+& binary & multi-valued\\ \hline
+sequence & binary categorical $\pi^k(1-\pi)^{n-k}$ & categorical $\prod_{i=1}^k\pi_i^{k_i}$ \\ \hline
+counts & binomial
+         $\big(\!\!\begin{array}{c}n\\k\end{array}\!\!\big)\pi^k(1-\pi)^{n-k}$
+& multinomial \frac{n!}{_1!k_2!\ldots k_m!}\prod_{i=1} \pi_i^{k_i}\\ \hline
+\end{tabular}
+\end{center}
+
+For binary outcomes with have $k$ successes in $n$ trials. For
+multi-dimensional distributions we have $k$ possible outcomes, a
+sequence $x_1,\ldots,x_N$ and counts $c_i=\sum_{n=1}^N\delta(x_n,i)$
+. For all distributions the parameter of the distribution is the
+vector ${\boldsymbol\pi}$, which has either one element
+$\pi \in [0; 1]$ or multiple entries such that $\pi_i>0$ and
+$\sum_i\pi_i=1$.
+
+
+
+\end{frame}
 
 
 \begin{frame}
