@@ -2,7 +2,7 @@
 
 \title{Linear in the parameters regression}
 \author{Carl Edward Rasmussen}
-\date{June 23rd, 2016}
+\date{October 15th, 2019}
 
 \begin{document}
 
@@ -138,8 +138,8 @@ E(\bfw)\;=\;(\bfy-\bff)^\top(\bfy-\bff)\;=\;(\bfy-\bPhi\,\bfw)^\top(\bfy-\bPhi\,
 The gradient with respect to the weights is:
 %
 \[
-\deldel{E(\bfw)}{\bfw}\;=\;2\,\bPhi^\top(\bfy-\bPhi\,\bfw)
-\;=\;2\,\bPhi^\top\,\bfy-2\bPhi^\top\,\bPhi\,\bfw
+\deldel{E(\bfw)}{\bfw}\;=\;-2\,\bPhi^\top(\bfy-\bPhi\,\bfw)
+\;=\;2\bPhi^\top\,\bPhi\,\bfw-2\,\bPhi^\top\,\bfy.
 \]
 %
 The weight vector $\hat\bfw$ that sets the gradient to zero minimises $E(\bfw)$:
