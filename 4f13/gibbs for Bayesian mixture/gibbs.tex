@@ -2,7 +2,7 @@
 
 \title{Gibbs Sampling for Bayesian Mixture}
 \author{Carl Edward Rasmussen}
-\date{November 26th, 2017}
+\date{November 27th, 2018}
 
 \begin{document}
 
@@ -107,8 +107,8 @@ p({\bf w}_d|\beta_{z_d}),
 \]
 are categorical and mixing proportions
 \[
-p(\theta|{\bf z},\alpha)\;\propto\;p(\theta|\alpha)p({\bf z}|\theta)\;=\;
-{\rm Dir}(\frac{c_k+\alpha_k}{\sum_{j=1}^K c_j+\alpha_j}).
+p(\theta|{\bf z},\alpha)\;\propto\;p(\theta|\alpha)p({\bf z}|\theta)\;\propto\;
+{\rm Dir}({\bf c}+\alpha).
 \]
 where $c_k=\sum_{d:z_d=k}1$ are the counts for mixture $k$.
 \end{frame}

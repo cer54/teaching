@@ -69,7 +69,69 @@ Different operations are more convenient in either parametrisation.
 \begin{frame}
 \frametitle{Gaussian Pictures}
 
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[width=0.4\textwidth]{{"../gaussian process/gauss00"}.pdf} &
+{\includegraphics[width=0.4\textwidth]{{"../gaussian process/gauss01"}.pdf}}
+\end{tabular}
+\end{center}
+
+The mean corresponds to the location or center of the
+distribution.\\[1ex]
+
+In one dimension, the square root of the variance corresponds to the
+\emph{width} of the distribution.\\[1ex]
+
+In multiple dimensions, the eigen-vectors of the covariance matrix
+give the principal axis of the elliptical equi-probability contours of
+the distribution, and the square root of the eigenvalues the width of the
+distribution in the corresponding directions.
 \end{frame}
+
+\begin{frame}
+\frametitle{Conditionals and Marginals of a Gaussian, pictorial}
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[width=0.45\textwidth]{{"../gaussian process/gauss02"}.pdf} &
+{\includegraphics[width=0.45\textwidth]{{"../gaussian process/gauss03"}.pdf}}
+\end{tabular}
+\end{center}
+
+Both the \Blue{conditionals $p(x|y)$} and the \Red{marginals $p(x)$}
+of a joint Gaussian $p(x,y)$ are again Gaussian.
+\end{frame}
+
+\begin{frame}
+\frametitle{Conditionals and Marginals of a Gaussian, algebra}
+
+If ${\bf x}$ and ${\bf y}$ are jointly Gaussian
+\[
+p(\bfx,\bfy)\;=\;p\big(\Big[\!\begin{array}{c}\bfx\\ \bfy\end{array}
+\!\Big]\big)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}\end{array}\!\Big],
+\;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big),
+\]
+
+we get the marginal distribution of ${\bf x}$, $p(\bfx)$ by
+\[
+p(\bfx,\bfy)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}
+\end{array}\!\Big],
+\;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big)
+\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}({\bf a},\;A),
+\]
+
+and the conditional distribution of ${\bf x}$ given ${\bf y}$ by
+\[
+p(\bfx,\bfy)={\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}
+\end{array}\!\Big],
+\;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big)
+\;\Longrightarrow\;p(\bfx|\bfy)={\cal N}({\bf a}+BC^{-1}(\bfy-\bfb),\;
+A-BC^{-1}B^\top),
+\]
+
+where ${\bf x}$ and ${\bf y}$ can be scalars or vectors.
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Gaussian Properties}
@@ -159,10 +221,10 @@ then
 \end{split}
 \]
 
-For any matrix $A$, if ${\bf z} = A{\bf x}$ then ${\bf z}$ is Gaussian and
+For any matrix $A$, if ${\bf z} = A{\bf x}+{\bf b}$ then ${\bf z}$ is Gaussian and
 \[
 \begin{split}
-\E[{\bf z}] \;&=\; A\mu,\\
+\E[{\bf z}] \;&=\; A\mu+{\bf b},\\
 \V[{\bf z}] \;&=\;A\Sigma A^\top.
 \end{split}
 \]
