@@ -1,9 +1,9 @@
 \input{../style.tex}
 
 \title[Gaussian Densities]{(Multivariate) Gaussian (Normal)\\ Probability Densities}
-\author[Rasmussen, Hern\`andez-Lobato \& Turner]{Carl Edward
+\author[Rasmussen, Hern\'andez-Lobato \& Turner]{Carl Edward
   Rasmussen,  Jos\'e Miguel Hern\'andez-Lobato \& Richard Turner}
-\date{April 20th, 2018}
+\date{August 5th, 2020}
 
 \begin{document}
 
@@ -42,7 +42,13 @@ p(x|\mu,\sigma^2)\;=\;\frac{1}{\sqrt{2\pi\sigma^2}}
 where $\sigma^2$ is the variance and $\sigma$ is the standard deviation.\\[1ex]
 
 The \emph{standard} Gaussian has $\boldsymbol{\mu}=\boldsymbol{0}$ and
-$\Sigma=I$ (the unit matrix).
+$\Sigma=I$ (the unit matrix), shorthand
+%
+\[
+{\cal N}({\bf x})\;=\;{\cal
+  N}({\bf x}|\boldsymbol{\mu}=\boldsymbol{0},\Sigma=I).
+\]
+
 \end{frame}
 
 \begin{frame}
@@ -203,6 +209,48 @@ with straight forward generalization to block diagonal Gaussians.
 }
 
 \end{frame}
+
+\begin{frame}
+\frametitle{Incomplete (truncated) scalar Gaussian integrals}
+
+Let $\Phi(z)$ be the standard cumulative Gaussian
+%
+\[
+\Phi(z)\;=\;\int_{-\infty}^z{\cal N}(x)dx\;=\;
+\int_{-\infty}^z\frac{1}{\sqrt{2\pi}}
+\exp(-\tfrac{1}{2}x^2)dx.
+\]
+%
+We then have the following incomplete Gaussian integrals
+%
+\[
+\int_a^b{\cal N}(x|\mu,\sigma^2)dx\;=\;\Phi(\beta)-\Phi(\alpha),
+\text{\ \ where\ \ }
+\alpha\;=\;\frac{a-\mu}{\sigma}\text{\ \ and\ \ }
+\beta\;=\;\frac{b-\mu}{\sigma}.
+\]
+%
+Further
+%
+\[
+  \int_a^b\frac{x-\mu}{\sigma}{\cal N}(x|\mu,\sigma^2)dx\;=\;
+  {\cal N}(\alpha)-{\cal N}(\beta),
+\]
+%
+and
+%
+\[
+ \int_a^b\Big(\frac{x-\mu}{\sigma}\Big)^2{\cal N}(x|\mu,\sigma^2)dx\;=\;
+  \alpha{\cal N}(\alpha)-\beta{\cal
+    N}(\beta)+\Phi(\beta)-\Phi(\alpha),
+\]
+%
+which can both be shown by integration by parts. Both expressions have
+the expected behaviour as $a\rightarrow-\infty$ and/or
+$b\rightarrow\infty$ (one sided Gaussians).
+
+\end{frame}
+
 
 \begin{frame}
 
