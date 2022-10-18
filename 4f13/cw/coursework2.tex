@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec} % This line only for XeLaTeX and LuaLaTeX
+\setmainfont{Sabon LT Std} % text font Sabon
+\usepackage[OT1,euler-digits]{eulervm} % math font euler
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\parskip=2ex
+\parindent=0ex
+\textheight=270mm
+\textwidth=7in
+\oddsidemargin=-0.25in
+\topmargin=-25mm
+\pagestyle{empty}
+
+\pagestyle{empty}
+\newcommand{\bi}{\begin{itemize}\vspace*{-0.3in}}
+\newcommand{\ei}{\end{itemize}\vspace*{-0.3in}}
+\newcommand{\im}{\item\vspace*{-0.4in}}
+\newcommand{\new}{^{\scriptscriptstyle \mathrm{new}}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\T}{{\scriptsize^{\top}}}
+\newcommand{\yy}{{\mathbf y}}
+\newcommand{\by}{{\mathbf y}}
+\newcommand{\xx}{{\mathbf x}}
+\newcommand{\bx}{{\mathbf x}}
+\newcommand{\zz}{{\mathbf z}}
+\newcommand{\Bet}{{\rm Beta}}
+\newcommand{\deldel}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\hh}{\hspace{0.2in}}
+\newcommand{\bpi}{{\boldsymbol{\pi}}}
+\newcommand{\bmu}{{\boldsymbol{\mu}}}
+\newcommand{\btheta}{{\boldsymbol{\theta}}} % amssymb
+\newcommand{\blambda}{{\boldsymbol{\lambda}}} % amssymb
+\newcommand{\bs}{{\mathbf s}}
+\newcommand{\be}{\begin{equation*}}
+\newcommand{\ee}{\end{equation*}}
+
+\begin{document}
+
+\centerline{\large\bf 4F13 Machine Learning: Coursework \#2:
+  Probabilistic Ranking}
+
+\vspace{0.3cm}
+
+\centerline{Carl Edward Rasmussen and David Scott Krueger} 
+
+\vspace{0.2cm}
+
+\centerline{Due: 12:00 noon, Nov 18th, 2022 online via moodle}
+
+\vspace{2mm}
+
+Your answers should contain an explanation of what you do, and 2-4
+central commands to achieve it (but complete listings are
+unnecessary). You must also give an \emph{interpretation} of what the
+numerical values and graphs you provide \emph{mean} -- why are the
+results the way they are? {\bf Each question should be labelled and
+  answered separately and distinctly.} Total combined length of
+answers must not exceed $1000$ words; clearly indicate the actual total
+number of words in your coursework. All questions carry approximately
+equal weight. Skeleton code is provided in both matlab and python,
+chose whichever you prefer.
+
+In this assignment, you'll be using the (binary) results of the 2011
+ATP men's tennis singles for 107 players in a total of 1801 games
+(which these players played against each other in the 2011 season), to
+compute probabilistic rankings of the skills of these players.
+
+The match data is provided in the file \texttt{tennis\_data.mat},
+which contains two matrices: \texttt{W}, whose $i$'th
+entry is the name of player $i$, and \texttt{G} is a 1801 by 2 matrix of
+the played games, one row per game: the first column is the identity
+of the player who won the game, and the second column contains the
+identity of the player who lost. Note, that this convention means that
+variable $y_g$ (the game outcome) in the lecture notes is always $+1$,
+and can consequently be ignored. Some rows will appear more than once
+(corresponding to two players having played each other several times
+with the same outcome).
+%
+\begin{enumerate}
+
+\item[a)] Complete the code in \texttt{gibbsrank}, by adding the lines
+  required to sample from the conditional distributions needed for
+  Gibbs sampling for the ranking model discussed in the lectures.  Run
+  the Gibbs sampler, eg for 1100 iterations. Plot some of the sampled
+  player skills as a function of the Gibbs iteration. What are the
+  burn in and auto-correlation times and how long would you run the
+  Gibbs sampler to get reliable results? Explain why. It may be
+  helpful to look at the auto covariance coefficient, which can be
+  calculated by the \texttt{xcov(samples,100,'coeff')} matlab command,
+  or the python lines provided.
+
+\item[b)] Do inference in the model instead, by running message
+  passing and EP using \texttt{eprank}. Explain the concept of
+  \emph{convergence} for both the Gibbs sampler and the message
+  passing algorithms. What type of object are we converging to in the
+  two cases, and how do you judge convergence, how many iterations are
+  necessary?
+  
+\item[c)] For the message passing algorithm, compute two 4 by 4 tables
+  of probabilities, including only the 4 top players according to the
+  ATP ranking in the lecture notes. First table for the probabilities
+  that the skill of one player is higher than the other, and second
+  table for the probability of one player winning a match between the
+  two. Explain the difference. The $\Phi$ function is implemented as
+  \texttt{normcdf} in matlab and \texttt{scipy.stats.norm.cdf} in python.
+
+\item[d)] For the Gibbs sampler, compare the skills of Nadal and
+  Djokovic in three different ways: 1) based on approximating their
+  marginal skills by Gaussians, 2) based on approximating their joint
+  skills by a Gaussian or 3) directly from the samples.
+  Which method is best? Using that method, derive a 4 by 4 table
+  for the skills (not the game outcomes) and compare to that of the
+  message passing algorithm (from question c)).
+
+\item[e)] Compare the rankings of players using predicted outcomes for three different
+  methods of inference: 1) empirical game outcome averages, 2) predictions based on
+  Gibbs sampling and 3) predictions based on the message passing
+  algorithm.  You may find the bar  plot in \texttt{cw2.m}
+  useful. Explain the differences.
+
+\end{enumerate}
+
+\end{document}

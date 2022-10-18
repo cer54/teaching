@@ -1,0 +1,122 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec} % This line only for XeLaTeX and LuaLaTeX
+\setmainfont{Sabon LT Std} % text font Sabon
+\usepackage[OT1,euler-digits]{eulervm} % math font euler
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\parskip=2ex
+\parindent=0ex
+\textheight=270mm
+\textwidth=7in
+\oddsidemargin=-0.25in
+\topmargin=-25mm
+\pagestyle{empty}
+
+\pagestyle{empty}
+\newcommand{\bi}{\begin{itemize}\vspace*{-0.3in}}
+\newcommand{\ei}{\end{itemize}\vspace*{-0.3in}}
+\newcommand{\im}{\item\vspace*{-0.4in}}
+\newcommand{\new}{^{\scriptscriptstyle \mathrm{new}}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+\newcommand{\T}{{\scriptsize^{\top}}}
+\newcommand{\yy}{{\mathbf y}}
+\newcommand{\by}{{\mathbf y}}
+\newcommand{\xx}{{\mathbf x}}
+\newcommand{\bx}{{\mathbf x}}
+\newcommand{\zz}{{\mathbf z}}
+\newcommand{\Bet}{{\rm Beta}}
+\newcommand{\deldel}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\hh}{\hspace{0.2in}}
+\newcommand{\bpi}{{\boldsymbol{\pi}}}
+\newcommand{\bmu}{{\boldsymbol{\mu}}}
+\newcommand{\btheta}{{\boldsymbol{\theta}}} % amssymb
+\newcommand{\blambda}{{\boldsymbol{\lambda}}} % amssymb
+\newcommand{\bs}{{\mathbf s}}
+\newcommand{\be}{\begin{equation*}}
+\newcommand{\ee}{\end{equation*}}
+
+\begin{document}
+
+\centerline{\large\bf 4F13 Probabilistic Machine Learning: Coursework \#1: Gaussian Processes}
+
+\vspace{0.3cm}
+
+\centerline{Carl Edward Rasmussen and David Scott Krueger} 
+
+\vspace{0.2cm}
+
+\centerline{Due: 12:00 noon, Friday Nov 4th, 2022 online via moodle}
+
+\vspace{2mm}
+
+Your answers should contain an explanation of what you do, and 2-4
+central commands to achieve it (but complete listings are
+unnecessary). You must also give an \emph{interpretation} of what the
+numerical values and graphs you provide \emph{mean} -- why are the
+results the way they are? {\bf Each question should be labelled and
+  answered separately and distinctly.} Total combined length of
+answers must not exceed $1000$ words; clearly indicate the actual total
+number of words in your coursework.
+
+You need the Gaussian Processes for Machine Learning (GPML) toolbox
+(version 4.2) for matlab and octave. Get the toolbox and walk through
+the documentation concerning regression from the Gaussian Process Web
+site at \texttt{www.gaussianprocess.org/gpml/code}\ \ Note, that
+sometimes hyperparameters are encoded using their logarithms (to avoid
+having to deal with \emph{constrained} optimization for positive
+parameters), but you will want to report them in their natural
+domain. All logs are natural (ie, base $e$). All questions carry
+approximately equal weight.
+%
+\begin{enumerate}
+
+\item[a)] Load data from \texttt{cw1a.mat}. Train a GP with a
+  squared exponential covariance function, \texttt{covSEiso}. Start
+  the log hyper-parameters at \texttt{hyp.cov = [-1 0]; hyp.lik = 0;} and
+  minimize the negative log marginal likelihood. Show the 95\%
+  predictive error bars. Comment on the predictive error bars and the
+  optimized hyperparameters.
+
+\item[b)] Show that by initializing the hyperparameters
+  differently, you can find a different local optimum for the
+  hyperparameters. Try a range of values. Show the fit. Explain what
+  the model is doing. Which fit is best, and why? How confident are
+  you about this and why?
+
+\item[c)] Train instead a GP with a periodic covariance
+  function. Show the fit. Comment on the behaviour of the error-bars,
+  compared to your fit from a). Do you think the data generating
+  mechanism (apart from the noise) was really strictly periodic? How
+  confident are you about this, and why?  Explain your reasoning.
+
+\item[d)] Generate random (essentially) noise free functions evaluated
+  at \texttt{x = linspace(-5,5,200)';} from a GP with the following
+  covariance function: \texttt{\{@covProd, \{@covPeriodic,
+    @covSEiso\}\}}, with covariance hyperparameters \texttt{hyp.cov =
+    [-0.5 0 0 2 0]}. In order to apply the Cholesky decomposition to
+  the covariance matrix, you may have to add a small diagonal matrix,
+  for example \texttt{1e-6*eye(200)}, why?  Plot some sample
+  functions. Explain the relationship between the properties of those
+  random functions and the form of the covariance function.
+
+\item[e)] Load \texttt{cw1e.mat}. This data has 2-D input and
+  scalar output. Visualise the data, for example using
+  \texttt{mesh(reshape(x(:,1),11,11),reshape(x(:,2),11,11),reshape(y,11,11));}
+  Rotate the data, to get a good feel for it. Compare two GP models of
+  the data, one with \texttt{covSEard} covariance and the other with 
+  \texttt{\{@covSum, \{@covSEard, @covSEard\}\}} covariance. For the
+  second model be sure to break symmetry with the initial
+  hyperparameters (eg by using \texttt{hyp.cov =
+    0.1*randn(6,1);}). 
+
+  Compare the models: How do the data fits compare? How do the
+  marginal likelihoods compare? Give a careful interpretation of the
+  relationship between data fit, marginal likelihood, and model
+  complexity for these two models.
+
+\end{enumerate}
+
+\end{document}
