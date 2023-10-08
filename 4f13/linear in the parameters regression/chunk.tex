@@ -2,7 +2,7 @@
 
 \title{Linear in the parameters regression}
 \author{Carl Edward Rasmussen}
-\date{October 15th, 2019}
+\date{October 9th, 2023}
 
 \begin{document}
 
@@ -42,7 +42,7 @@ We will estimate $y_*$ with $f(x_*)$.
 \item But what is $f(x)$? Example: a polynomial
 %
 \[
-f_\bfw(x)\;=\; w_0 + w_1\,x + w_2\,x^2 + w_3\,x^3 + \ldots + w_M\,x^M
+f_{\bm w}(x)\;=\; w_0 + w_1\,x + w_2\,x^2 + w_3\,x^3 + \ldots + w_M\,x^M
 \]
 %
 The $w_j$ are the weights of the polynomial, the \Blue{parameters} of the model.
@@ -87,7 +87,7 @@ The $w_j$ are the weights of the polynomial, the \Blue{parameters} of the model.
 E(\bfw)\;=\;\sum_{i=1}^N e_i^2
 \]
 %
-$f_\bfw(x)$ is a function of the parameter vector 
+$f_{\bm w}(x)$ is a function of the parameter vector 
 $\bfw=[w_0, w_1, \ldots, w_M]\T$.
 \end{itemize}
 
@@ -100,7 +100,8 @@ $\bfw=[w_0, w_1, \ldots, w_M]\T$.
 Some notation: training targets $\bfy$, predictions $\bff$ and errors $\bfe$.
 \begin{itemize}
 \item $\bfy=[y_1,\ldots,y_N]^\top$ is a vector that stacks the $N$ training targets.
-\item $\bff=[f_\bfw(x_1), \ldots, f_\bfw(x_N)]^\top$  stacks $f_\bfw(x)$ evaluated at 
+\item $\bff=[f_{\bm w}(x_1), \ldots, f_{\bm w}(x_N)]^\top$  stacks
+  $f_{\bm w}(x)$ evaluated at 
 the $N$ training inputs.
 \item $\bfe=\bfy-\bff$ is the vector of training prediction errors.
 \end{itemize}
@@ -117,7 +118,7 @@ More notation: weights $\bfw$, basis functions $\phi_j(x)$ and matrix $\bPhi$.
 model.
 %
 \[
-f_\bfw(x)\; =\; \Blue{w_0}\,\Red{1} + \Blue{w_1}\,\Red{x} + \Blue{w_2}\,\Red{x^2} + 
+f_{\bm w}(x)\; =\; \Blue{w_0}\,\Red{1} + \Blue{w_1}\,\Red{x} + \Blue{w_2}\,\Red{x^2} + 
 \ldots + \Blue{w_M}\,\Red{x^M}\; =\; \sum_{j=0}^M \Blue{w_j}\,\Red{\phi_j(x)}
 \]
 %
