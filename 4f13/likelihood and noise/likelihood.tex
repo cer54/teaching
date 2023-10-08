@@ -1,8 +1,8 @@
 \input{../style.tex}
 
-\title{Likelihood and noise}
+\title{Likelihood and Noise}
 \author{Carl Edward Rasmussen}
-\date{June 23rd, 2016}
+\date{October 9th, 2023}
 
 \begin{document}
 
@@ -33,25 +33,21 @@
 \begin{frame}
 \frametitle{Observation noise}
 
-\centerline{\includegraphics[width=0.5\textwidth]{toy_data_illustrate_Gaussian_noise.pdf}}
-\vskip -4mm
+\centerline{\includegraphics[width=0.45\textwidth]{toy_data_illustrate_Gaussian_noise.pdf}\;\includegraphics[width=0.45\textwidth]{gauss00.pdf}}
 \begin{itemize}
 \item Imagine the data was in reality \Red{generated} by the \Red{red function}.
 \item But each $f(x_*)$ was independently contaminated by a noise term $\epsilon_n$.
-\item The observations are noisy: $y_n=f_\bfw(x_n)+\epsilon_n$.
+\item The observations are noisy: $y_n=f_{\bm w}(x_n)+\epsilon_n$.
 \item We can characterise the noise with a probability density function.\\ 
 For example a Gaussian density function, $\epsilon_n\sim\N(\epsilon_n
 ; \;0, \sigma_\mathrm{noise}^2)$:
 \[
 p(\epsilon_n)\;=\;\frac{1}{\sqrt{2\pi\,\sigma_\mathrm{noise}^2}}
-\exp{\Big(-\frac{\epsilon_n^2}{2\,\sigma_\mathrm{noise}^2}\Big)}
+\exp\big(-\frac{\epsilon_n^2}{2\,\sigma_\mathrm{noise}^2}\big)
 \]
-%
 \end{itemize}
-
-
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Probability of the observed data given the model}
 
@@ -78,9 +74,8 @@ p(\bfy|\bff,\,\sigma_\mathrm{noise}^2)=\N(\bfy;\;\bff,\,\sigma_\mathrm{noise}^2)
 \end{align*}
 %
 \item
-  $\Red{E(\bfw)}\!=\!\sum_{n=1}^N(y_n-f_\bfw(x_n))^2\!=\!\|\bfy-\bPhi\,\bfw\|^2
-  \!= \!\bepsilon^\top\!\bepsilon$ is the sum of squared 
-errors
+  $\Red{E(\bfw)}=\sum_{n=1}^N(y_n-f_{\bm w}(x_n))^2=\|\bfy-\bPhi\,\bfw\|^2
+  = \bepsilon^\top\!\bepsilon$ is the sum of squared errors
 \item Since $\bff=\bPhi\,\bfw$ we can write 
 $p(\bfy|\bfw,\,\sigma_\mathrm{noise}^2)=p(\bfy|\bff,\,\sigma_\mathrm{noise}^2)$ for a given $\bPhi$.
 \end{itemize}
