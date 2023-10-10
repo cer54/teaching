@@ -128,7 +128,7 @@ p(y_*|x_*,\bfx, \bfy,\mathcal{M})\;&=\;
 Marginal likelihood:
 \[
 \Cyan{p(\bfy|\bfx,\mathcal{M})}\;=\;
-\int \Blue{p(\bfw|\bfx,\mathcal{M})}  \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d\bfw.
+\int \Blue{p(\bfw|\mathcal{M})}  \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d\bfw.
 \]
 \end{frame}
 
@@ -203,7 +203,7 @@ Marginal likelihood, or ''evidence'' of a finite linear model:
 \[
 \begin{split}
 \Cyan{p(\bfy|\bfx,\mathcal{M})}\;&=\;
-\int \Blue{p(\bfw|\bfx,\mathcal{M})}
+\int \Blue{p(\bfw|\mathcal{M})}
 \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d{\bf w}\\
 &=\;\N(\bfy;\;\mathbf{0},\sigma_{\bm w}^2\,\bPhi\,\bPhi^\top+\sigma_\mathrm{noise}^2\,\bfI).
 \end{split}
