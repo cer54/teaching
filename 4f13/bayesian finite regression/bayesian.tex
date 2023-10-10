@@ -2,7 +2,7 @@
 
 \title{Bayesian inference and prediction\\ in finite regression models}
 \author{Carl Edward Rasmussen}
-\date{October 13th, 2016}
+\date{October 10th, 2023}
 
 \begin{document}
 
@@ -81,25 +81,25 @@ Some remarks:
 
 Supervised parametric learning:
 \begin{itemize}
-\item data: ${\bf x}, {\bf y}$
-\item model $\mathcal{M}$: $y = f_{\bf w}(x) + \varepsilon$
+\item data: $\bfx, \bfy$
+\item model $\mathcal{M}$: $y = f_{\bm w}(x) + \varepsilon$
 \end{itemize}
 
 Gaussian likelihood:
 \[
-\Red{p({\bf y}|{\bf x},{\bf w}, \mathcal{M})}\;\propto\;
+\Red{p(\bfy|\bfx,\bfw, \mathcal{M})}\;\propto\;
 \prod_{n=1}^N\exp(-\tfrac{1}{2}(y_n-f_{\bf w}(x_n))^2/\sigma^2_{\rm noise}).
 \]
 
 Maximize the likelihood:
 \[
-\Blue{{\bf w}_{\rm ML}}\;=\;\operatornamewithlimits{argmax}_{\bf w}
-\Red{p({\bf y}|{\bf x},{\bf w},\mathcal{M})}.
+\Blue{\bfw_{\rm ML}}\;=\;\operatornamewithlimits{argmax}_{\bm w}
+\Red{p(\bfy|\bfx,\bfw,\mathcal{M})}.
 \]
 
 Make predictions, by plugging in the ML estimate:
 \[
-\Red{p(y_*|x_*,\Blue{{\bf w}_{\rm ML}},\mathcal{M})}
+\Red{p(y_*|x_*,\Blue{\bfw_{\rm ML}},\mathcal{M})}
 \]
 
 \vfill
@@ -110,25 +110,25 @@ Make predictions, by plugging in the ML estimate:
 \begin{frame}
 \frametitle{Bayesian inference, parametric model}
 
-Posterior parameter distribution by Bayes rule ({\small $\Green{p(a|b)}=\Blue{p(a)} \Red{p(b|a)}/\Cyan{p(b)}$}):
+Posterior parameter distribution by Bayes rule ($\Green{p(a|b)}\Cyan{p(b)}=\Blue{p(a)} \Red{p(b|a)}$):
 \[
-\Green{p({\bf w}|{\bf x},{\bf y},\mathcal{M})}\;=\;\frac{\Blue{p({\bf w}|\mathcal{M})}
-\Red{p({\bf y}|{\bf x},{\bf w},\mathcal{M})}}{\Cyan{p({\bf y}|{\bf x},\mathcal{M})}}
+\Green{p(\bfw|\bfx,\bfy,\mathcal{M})}\Cyan{p(\bfy|\bfx,\mathcal{M})}
+\;=\;\Blue{p(\bfw|\mathcal{M})}\Red{p(\bfy|\bfx,\bfw,\mathcal{M})}
 \]
 
 Making predictions (marginalizing out the parameters):
 \[
 \begin{split}
-p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;&=\;
-\int p(y_*,{\bf w}|{\bf x}, {\bf y}, x_*, \mathcal{M})d{\bf w}\\
-&=\;\int \Red{p(y_*|{\bf w},x_*,\mathcal{M})}\Green{p({\bf w}|{\bf x}, {\bf y},\mathcal{M})}d{\bf w}.
+p(y_*|x_*,\bfx, \bfy,\mathcal{M})\;&=\;
+\int p(y_*,\bfw|\bfx, \bfy, x_*, \mathcal{M})d\bfw\\
+&=\;\int \Red{p(y_*|\bfw,x_*,\mathcal{M})}\Green{p(\bfw|\bfx,\bfy,\mathcal{M})}d\bfw.
 \end{split}
 \]
 
 Marginal likelihood:
 \[
-\Cyan{p({\bf y}|{\bf x},\mathcal{M})}\;=\;
-\int \Blue{p({\bf w}|\bfx,\mathcal{M})}  \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d{\bf w}
+\Cyan{p(\bfy|\bfx,\mathcal{M})}\;=\;
+\int \Blue{p(\bfw|\bfx,\mathcal{M})}  \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d\bfw.
 \]
 \end{frame}
 
@@ -139,29 +139,30 @@ Marginal likelihood:
 For a linear-in-the-parameters model with Gaussian priors and Gaussian noise:
 \begin{itemize}
 \item Gaussian \Blue{\emph{prior}} on the weights: 
-$\Blue{p(\bfw|\mathcal{M})}=\N(\bfw;\;\mathbf{0},\,\sigma_\bfw^2\,\bfI)$
+$\Blue{p(\bfw|\mathcal{M})}=\N(\bfw;\;\mathbf{0},\,\sigma_{\bm w}^2\,\bfI)$
 \item Gaussian \Red{\emph{likelihood}} of the weights:
 $\Red{p(\bfy|\bfx,\bfw,\mathcal{M}})=\N(\bfy;\;\bPhi\,\bfw,\,\sigma_\mathrm{noise}^2\,\bfI)$
 \end{itemize}
 
 \Green{Posterior} parameter distribution by Bayes rule $p(a|b)=p(a)p(b|a)/p(b)$:
 \[
-\Green{p({\bf w}|{\bf x},{\bf y},\mathcal{M})}\;=\;\frac{\Blue{p({\bf w}|\mathcal{M})}
-\Red{p({\bf y}|{\bf x},{\bf w},\mathcal{M})}}{\Cyan{p({\bf y}|{\bf x},\mathcal{M})}}
+\Green{p(\bfw|\bfx,\bfy,\mathcal{M})}\;=\;\frac{\Blue{p(\bfw|\mathcal{M})}
+\Red{p(\bfy|\bfx,\bfw,\mathcal{M})}}{\Cyan{p(\bfy|\bfx,\mathcal{M})}}
 \;=\; \N(\bfw;\;\bmu,\,\bSigma)
 \]
 \[
-\bSigma\;=\;\left(\sigma_\mathrm{noise}^{-2}\bPhi^\top\bPhi+\sigma_\bfw^{-2}\,\bfI\right)^{-1}
+\bSigma\;=\;\left(\sigma_\mathrm{noise}^{-2}\bPhi^\top\bPhi+\sigma_{\bm
+    w}^{-2}\,\bfI\right)^{-1}
 \mathrm{\; \; \; and \; \; \; \; }
 \bmu\;=\;
-\Big(\bPhi^\top\bPhi+\frac{\sigma_\mathrm{noise}^2}{\sigma_\bfw^2}\,\bfI\Big)^{-1}\bPhi^\top\bfy
+\Big(\bPhi^\top\bPhi+\frac{\sigma_\mathrm{noise}^2}{\sigma_{\bm w}^2}\,\bfI\Big)^{-1}\bPhi^\top\bfy
 \]
 
 The predictive distribution is given by:
 \[
 \begin{split}
-p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;&=\;\int
-\Red{p(y_*|{\bf w},x_*,\mathcal{M})}\Green{p({\bf w}|{\bf x}, {\bf y},\mathcal{M})}d{\bf w}\\
+p(y_*|x_*,\bfx, \bfy,\mathcal{M})\;&=\;\int
+\Red{p(y_*|\bfw,x_*,\mathcal{M})}\Green{p(\bfw|\bfx, \bfy,\mathcal{M})}d\bfw\\
 &=\;\N(y_*;\; \bphi(x_*)^\top\bmu,\,\bphi(x_*)^\top\bSigma\bphi(x_*)+\sigma_\mathrm{noise}^2).
 \end{split}
 \]
@@ -175,18 +176,20 @@ p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;&=\;\int
 \centerline{\includegraphics[width=0.6\textwidth]{polynomial_deg3_predictive_dist_and_post_samples}}
 
 Remember that a finite linear model $f(x_n)=\bphi(x_n)^\top\bfw$ with prior on the weights 
-$p(\bfw)=\N(\bfw;\; \mathbf{0}, \sigma_\bfw^2 \bfI)$ has a posterior distribution
+$p(\bfw)=\N(\bfw;\; \mathbf{0}, \sigma_{\bm w}^2 \bfI)$ has a posterior distribution
 \[
-\Green{p({\bf w}|{\bf x},{\bf y},\mathcal{M})}\;=\;\N(\bfw;\;\bmu,\,\bSigma)
+\Green{p(\bfw|\bfx,\bfy,\mathcal{M})}\;=\;\N(\bfw;\;\bmu,\,\bSigma)
 \mathrm{\; \; \; with \; \; \;}
 \begin{array}{l}
-\bSigma\;=\;\left(\sigma_\mathrm{noise}^{-2}\bPhi^\top\bPhi+ \sigma_\bfw^{-2}\right)^{-1}\\
-\bmu\;=\;\Big(\bPhi^\top\bPhi+ \frac{\sigma_\mathrm{noise}^2}{\sigma_\bfw^2}\,I\Big)^{-1}\bPhi^\top\bfy
+\bSigma\;=\;\left(\sigma_\mathrm{noise}^{-2}\bPhi^\top\bPhi+
+  \sigma_{\bm w}^{-2}\right)^{-1}\\
+\bmu\;=\;\Big(\bPhi^\top\bPhi+
+  \frac{\sigma_\mathrm{noise}^2}{\sigma_{\bm w}^2}\,I\Big)^{-1}\bPhi^\top\bfy
 \end{array}
 \]
 and predictive distribution
 \[
-p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;=\;
+p(y_*|x_*,\bfx, \bfy,\mathcal{M})\;=\;
 \N(y_*;\; \bphi(x_*)^\top\bmu,\,\bphi(x_*)^\top\bSigma\bphi(x_*)+\sigma_\mathrm{noise}^2\,\bfI)
 \]
 \end{frame}
@@ -199,10 +202,10 @@ p(y_*|x_*,{\bf x}, {\bf y},\mathcal{M})\;=\;
 Marginal likelihood, or ''evidence'' of a finite linear model:
 \[
 \begin{split}
-\Cyan{p({\bf y}|{\bf x},\mathcal{M})}\;&=\;
-\int \Blue{p({\bf w}|\bfx,\mathcal{M})}
+\Cyan{p(\bfy|\bfx,\mathcal{M})}\;&=\;
+\int \Blue{p(\bfw|\bfx,\mathcal{M})}
 \Red{p(\bfy|\bfx,\bfw,\mathcal{M})}  d{\bf w}\\
-&=\;\N(\bfy;\;\mathbf{0},\sigma_\bfw^2\,\bPhi\,\bPhi^\top+\sigma_\mathrm{noise}^2\,\bfI).
+&=\;\N(\bfy;\;\mathbf{0},\sigma_{\bm w}^2\,\bPhi\,\bPhi^\top+\sigma_\mathrm{noise}^2\,\bfI).
 \end{split}
 \]
 Luckily for Gaussian noise there is a closed-form analytical solution!

@@ -2,7 +2,7 @@
 
 \title{Probability fundamentals}
 \author{Carl Edward Rasmussen}
-\date{June 29th, 2016}
+\date{October 10th, 2023}
 
 \begin{document}
 
@@ -89,25 +89,25 @@ The question is what is $p(C|M)$?
 
 What is $p(C|M)$?
 
-Consider 10000 subjects of screening
+Consider $10000$ subjects of screening
 \begin{itemize}
-\item $p(C) = 1\%$, therefore 100 of them have cancer, of which
+\item $p(C) = 1\%$, therefore $100$ of them have cancer, of which
 \begin{itemize}
-\item $p(M|C) = 80\%$, therefore 80 get a positive mammography
-\item 20 get a negative mammography
+\item $p(M|C) = 80\%$, therefore $80$ get a positive mammography
+\item $20$ get a negative mammography
 \end{itemize}
-\item $p(\bar{C}) = 99\%$, therefore 9900 of them do not have cancer, of which
+\item $p(\bar{C}) = 99\%$, therefore $9900$ of them do not have cancer, of which
 \begin{itemize}
-\item $p(M|\bar{C}) = 9.6\%$, therefore 950 get a positive mammography
-\item 8950 get a  negative mammography
+\item $p(M|\bar{C}) = 9.6\%$, therefore $950$ get a positive mammography
+\item $8950$ get a  negative mammography
 \end{itemize}
 \end{itemize}
 
 \begin{center}
 \begin{tabular}[h]{c|c|c}
 & $M$ & $\bar M$\\\hline
-\rule{0mm}{5mm}$C$ & \Red{80} & 20\\\hline
-\rule{0mm}{5mm}$\bar C$ & \Blue{950} & 8950 \\\hline
+\rule{0mm}{5mm}$C$ & $\Red{80}$ & $20$\\\hline
+\rule{0mm}{5mm}$\bar C$ & $\Blue{950}$ & $8950$ \\\hline
 \end{tabular}
 \end{center}
 
@@ -121,8 +121,8 @@ What is $p(C|M)$?
 \begin{center}
 \begin{tabular}[h]{c|c|c}
 & $M$ & $\bar M$\\\hline
-\rule{0mm}{5mm}$C$ & \Red{80} & 20\\\hline
-\rule{0mm}{5mm}$\bar C$ & \Blue{950} & 8950 \\\hline
+\rule{0mm}{5mm}$C$ & \Red{$80$} & $20$\\\hline
+\rule{0mm}{5mm}$\bar C$ & \Blue{$950$} & $8950$ \\\hline
 \end{tabular}
 \end{center}
 
@@ -131,14 +131,14 @@ mammographies for which there actually is breast cancer
 
 \[
 p(C|M)\;=\;\frac{p(C,M)}{p(C,M) + p(\bar C ,M)}
-\;=\;\frac{p(C,M)}{p(M)}\;=\;\frac{\Red{80}}{\Red{80} + \Blue{950}}\;\simeq\;7.8\%
+\;=\;\frac{p(M|C)p(C)}{p(M)}\;=\;\frac{\Red{80}}{\Red{80} + \Blue{950}}\;\simeq\;7.8\%
 \]
 
 This is an example of Bayes' rule:
 \[
-p(A|B) \;=\; \frac{p(B|A)p(A)}{p(B)}.
+p(A|B)p(B) \;=\; p(A,B) \;=\; p(B|A)p(A),
 \]
-Which is just a consequence of the definition of \Blue{\emph{conditional
+which is just a consequence of the definition of \Blue{\emph{conditional
   probability}}
 \[
 p(A|B)\;=\;\frac{p(A,B)}{p(B)},\text{\ \ \ \ (where $p(B)\neq 0$)}.
