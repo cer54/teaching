@@ -45,11 +45,11 @@
 
 \vspace{0.3cm}
 
-\centerline{Carl Edward Rasmussen and David Scott Krueger} 
+\centerline{Carl Edward Rasmussen \& Hong Ge} 
 
 \vspace{0.2cm}
 
-\centerline{Due: 12:00 noon, Nov 18th, 2022 online via moodle}
+\centerline{Due (for non-MLMI students): 12:00 noon, Friday Nov 22th, 2024 online via moodle}
 
 \vspace{2mm}
 
@@ -58,11 +58,11 @@ central commands to achieve it (but complete listings are
 unnecessary). You must also give an \emph{interpretation} of what the
 numerical values and graphs you provide \emph{mean} -- why are the
 results the way they are? {\bf Each question should be labelled and
-  answered separately and distinctly.} Total combined length of
-answers must not exceed $1000$ words; clearly indicate the actual total
-number of words in your coursework. All questions carry approximately
-equal weight. Skeleton code is provided in both matlab and python,
-chose whichever you prefer.
+  answered separately and distinctly.} All questions carry
+approximately equal weight. Total combined length of answers must not
+exceed 5 sides of a4 (plus cover page), minimum 11pt font, 1 inch
+margins. Skeleton code is provided in both matlab and python, chose
+whichever you prefer.
 
 In this assignment, you'll be using the (binary) results of the 2011
 ATP men's tennis singles for 107 players in a total of 1801 games
@@ -91,7 +91,8 @@ with the same outcome).
   Gibbs sampler to get reliable results? Explain why. It may be
   helpful to look at the auto covariance coefficient, which can be
   calculated by the \texttt{xcov(samples,100,'coeff')} matlab command,
-  or the python lines provided.
+  or the python lines provided. What is the computational complexity
+  of running the Gibbs sampler, and why?
 
 \item[b)] Do inference in the model instead, by running message
   passing and EP using \texttt{eprank}. Explain the concept of
@@ -109,18 +110,20 @@ with the same outcome).
   \texttt{normcdf} in matlab and \texttt{scipy.stats.norm.cdf} in python.
 
 \item[d)] For the Gibbs sampler, compare the skills of Nadal and
-  Djokovic in three different ways: 1) based on approximating their
+  Federer in three different ways: 1) based on approximating their
   marginal skills by Gaussians, 2) based on approximating their joint
   skills by a Gaussian or 3) directly from the samples.
   Which method is best? Using that method, derive a 4 by 4 table
   for the skills (not the game outcomes) and compare to that of the
-  message passing algorithm (from question c)).
+  message passing algorithm (from question c)). What do you conclude
+  about the two methods? Explain why.
 
 \item[e)] Compare the rankings of players using predicted outcomes for three different
   methods of inference: 1) empirical game outcome averages, 2) predictions based on
   Gibbs sampling and 3) predictions based on the message passing
   algorithm.  You may find the bar  plot in \texttt{cw2.m}
-  useful. Explain the differences.
+  useful. Explain the differences and the pros and cons of the three
+  different methods.
 
 \end{enumerate}
 

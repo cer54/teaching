@@ -2,7 +2,7 @@
 
 \title{Gaussian Process}
 \author{Carl Edward Rasmussen}
-\date{October 10th, 2016}
+\date{October 17th, 2022}
 
 \begin{document}
 
@@ -66,31 +66,31 @@ of a joint Gaussian $p(x,y)$ are again Gaussian.
 \begin{frame}
 \frametitle{Conditionals and Marginals of a Gaussian, algebra}
 
-If ${\bf x}$ and ${\bf y}$ are jointly Gaussian
+If $\bfx$ and $\bfy$ are jointly Gaussian
 \[
 p(\bfx,\bfy)\;=\;p\big(\Big[\!\begin{array}{c}\bfx\\ \bfy\end{array}
-\!\Big]\big)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}\end{array}\!\Big],
+\!\Big]\big)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}\bfa \\ \bfb\end{array}\!\Big],
 \;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big),
 \]
 
-we get the marginal distribution of ${\bf x}$, $p(\bfx)$ by
+we get the marginal distribution of $\bfx$, $p(\bfx)$ by
 \[
-p(\bfx,\bfy)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}
+p(\bfx,\bfy)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}\bfa \\ \bfb
 \end{array}\!\Big],
 \;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big)
-\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}({\bf a},\;A),
+\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}(\bfa,\;A),
 \]
 
-and the conditional distribution of ${\bf x}$ given ${\bf y}$ by
+and the conditional distribution of $\bfx$ given $\bfy$ by
 \[
-p(\bfx,\bfy)={\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}
+p(\bfx,\bfy)={\cal N}\big(\Big[\!\begin{array}{c}\bfa \\ \bfb
 \end{array}\!\Big],
 \;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big)
-\;\Longrightarrow\;p(\bfx|\bfy)={\cal N}({\bf a}+BC^{-1}(\bfy-\bfb),\;
+\;\Longrightarrow\;p(\bfx|\bfy)={\cal N}(\bfa+BC^{-1}(\bfy-\bfb),\;
 A-BC^{-1}B^\top),
 \]
 
-where ${\bf x}$ and ${\bf y}$ can be scalars or vectors.
+where $\bfx$ and $\bfy$ can be scalars or vectors.
 \end{frame}
 
 
@@ -117,7 +117,7 @@ covariance matrix $\Sigma$:
 A Gaussian \Blue{process} is fully specified by a mean function $m(x)$ and
 covariance function $k(x,x')$:
 \[
-f\;\sim\;{\cal GP}(m,k), \text{\ \ \ indexes:\ }x \in
+f\;\sim\;{\cal N}(m,k), \text{\ \ \ indexes:\ }x \in
 {\cal X}
 \]
 here $f$ and $m$ are functions on ${\cal X}$, and $k$ is a function on
@@ -140,12 +140,18 @@ p(\bfx)\;=\;\int p(\bfx,\bfy)d\bfy.
 
 For Gaussians:
 \[
-p(\bfx,\bfy)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}{\bf a} \\ {\bf b}
+p(\bfx,\bfy)\;=\;{\cal N}\big(\Big[\!\begin{array}{c}\bfa \\ \bfb
 \end{array}\!\Big],
 \;\Big[\!\begin{array}{cc}A & B \\ B^\top & C\end{array}\!\Big]\big)
-\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}({\bf a},\;A),
+\;\;\Longrightarrow\;\;p(\bfx)\;=\;{\cal N}(\bfa,\;A),
 \]
-which works \Red{irrespective} of the size of $\bfy$.\\[1ex]
+which works \Red{irrespective} of the size of $\bfy$.
+
+For Gaussian processes:
+\[
+  f\;\sim\;{\cal N}(m,k)\;\Longrightarrow\;\bff\;=\;f(\bfx)\;\sim\;{\cal
+    N}(\mu=\bfm=m(\bfx),\,\Sigma=K(\bfx,\bfx)).
+\]
 
 \Blue{Key}: only ever ask finite dimensional questions about functions.
 
@@ -157,7 +163,7 @@ which works \Red{irrespective} of the size of $\bfy$.\\[1ex]
 
 Example one dimensional Gaussian process:
 \[
-p(f)\;\sim\;{\cal GP}\big(m,\;k\big),
+p(f)\;\sim\;{\cal N}\big(m,\;k\big),
 \text{\ \ where\ \ }m(x) = 0,\text{\ \ and\ \ }k(x,x') = \exp(-\tfrac{1}{2}(x-x')^2).
 \]
 %
@@ -177,7 +183,7 @@ Then plot the coordinates of $f$ as a function of the corresponding $x$ values.
 \frametitle{Joint Generation}
 
 To generate a random sample from a D dimensional joint Gaussian with
-covariance matrix $K$ and mean vector ${\bf m}$: (in octave or matlab)
+covariance matrix $K$ and mean vector $\bfm$: (in octave or matlab)
 
 \begin{verbatim}
   z = randn(D,1);
@@ -188,8 +194,8 @@ where \texttt{chol} is the Cholesky factor $R$ such that $R^\top R=K$.
 
 Thus, the covariance of $\bfy$ is:
 \[
-\mathbb{E}[(\bfy-{\bf m})(\bfy-{\bf m})^\top]\;=\;\mathbb{E}[R^\top{\bf z}
-{\bf z}^\top R]\;=\;R^\top\mathbb{E}[{\bf z}{\bf z}^\top]R\;=\;R^\top IR\;=\;K.
+\mathbb{E}[(\bfy-\bfm)(\bfy-\bfm)^\top]\;=\;\mathbb{E}[R^\top\bfz
+\bfz^\top R]\;=\;R^\top\mathbb{E}[\bfz\bfz^\top]R\;=\;R^\top IR\;=\;K.
 \]
 \end{frame}
 
@@ -204,14 +210,14 @@ p(f_n|f_{n-1},\ldots,f_1,x_n,\ldots,x_1),
 \]
 and generate function values sequentially. For Gaussians:
 \begin{align*}
-p(f_n,f_{<n})&\;=\;{\cal N}\big(\Big[\!\!\begin{array}{c}{\bf a} \\ {\bf b}
+p(f_n,\bff_{<n})&\;=\;{\cal N}\big(\Big[\!\!\begin{array}{c}\bfa \\ \bfb
 \end{array}\!\!\Big],\Big[\!\!\begin{array}{cc}A\!\!&\!\!B \\ B^\top\!\!&\!\!C\end{array}\!\!\Big]\big)
 \;\Longrightarrow\\
-p(f_n|f_{<n})&\;=\;{\cal N}({\bf a}+BC^{-1}(f_{<n}-\bfb),\; A-BC^{-1}B^\top).
+p(f_n|\bff_{<n})&\;=\;{\cal N}(\bfa+BC^{-1}(\bff_{<n}-\bfb),\; A-BC^{-1}B^\top).
 \end{align*}
-\includegraphics[width=0.33\textwidth]{seq_fullGP_M1.pdf}
-\includegraphics[width=0.33\textwidth]{seq_fullGP_M3.pdf}
-\includegraphics[width=0.33\textwidth]{seq_fullGP_M7.pdf}
+\includegraphics[width=0.32\textwidth]{seq_fullGP_M1.pdf}
+\includegraphics[width=0.32\textwidth]{seq_fullGP_M3.pdf}
+\includegraphics[width=0.32\textwidth]{seq_fullGP_M7.pdf}
 \end{frame}
 
 

@@ -2,7 +2,7 @@
 
 \title{GP Marginal Likelihood and Hyperparameters}
 \author{Carl Edward Rasmussen}
-\date{October 13th, 2016}
+\date{October 18th, 2022}
 
 \begin{document}
 
@@ -32,8 +32,8 @@
 
 Log marginal likelihood has a closed form
 \[
-\log p({\bf y}|{\bf x},\mathcal{M}_i)\;=\;\Blue{-\frac{1}{2}{\bf y}
-^\top [K+\sigma_n^2I]^{-1}{\bf y}}
+\log Z_{|\bfy}\;=\;\log p(\bfy|\bfx,\mathcal{M}_i)\;=\;\Blue{-\frac{1}{2}\bfy
+^\top [K+\sigma_n^2I]^{-1}\bfy}
 -\Red{\frac{1}{2}\log|K+\sigma_n^2I|}-\frac{n}{2}\log(2\pi)
 \]
 and is the combination of a \Blue{data fit} term and \Red{complexity penalty}.

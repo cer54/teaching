@@ -2,7 +2,7 @@
 
 \title{Gibbs Sampling for Bayesian Mixture}
 \author{Carl Edward Rasmussen}
-\date{November 27th, 2018}
+\date{November 27th, 2022}
 
 \begin{document}
 
@@ -67,7 +67,7 @@ p({\bf w}_d|z_d=k,\boldsymbol\beta)\;=\;p({\bf
 \]
 and the prior
 \[
-p(\boldsymbol\beta_k).
+p(\boldsymbol\beta_k)\;=\;{\rm Dir}(\gamma)
 \]
 
 The categorical latent component assignment probability
@@ -96,9 +96,10 @@ Iteratively, alternately, sample the three types of variables:\\[1ex]
 
 Component parameters
 \[
-p(\beta_k|{\bf w},{\bf z})\;\propto\;p(\beta_k)\prod_{d:z_d=k}p({\bf w}_d|\beta_k),
+p(\beta_k|{\bf w},{\bf z})\;\propto\;p(\beta_k)\prod_{d:z_d=k}p({\bf
+  w}_d|\beta_k)\;\propto\;{\rm Dir}(\gamma+c_{mk}),
 \]
-which is now a categorical model, the mixture aspect having been eliminated.\\[1ex]
+with $c_{mk}=\sum_{d:z_d=k}c_{md}$. This is now a categorical model, the mixture aspect having been eliminated.\\[1ex]
 
 The posterior latent conditional allocations
 \[
@@ -120,7 +121,12 @@ The parameters are treated in the same way as before.\\[1ex]
 
 If we \Blue{marginalize} over $\theta$
 \[
-p(z_d=k|{\bf z}_{-d},\alpha)\;=\;\frac{\alpha+c_{-d,k}}{\sum_{j=1}^K\alpha+c_{-d,j}},
+\begin{split}  
+  p(z_d=k|{\bf z}_{-d},\alpha)\;&=\;
+  \int p(z_d=k|\theta)p(\theta|{\bf z}_{-d},\alpha)d\theta\\
+&=\;\int \theta_k p(\theta|{\bf z}_{-d},\alpha)d\theta\;=\;
+\frac{\alpha+c_{-d,k}}{\sum_{j=1}^K\alpha+c_{-d,j}},
+\end{split}
 \]
 where index $-d$ means \emph{all except} $d$, and $c_k$ are counts;\\
 we derived this result when discussing pseudo counts.\\[1ex]

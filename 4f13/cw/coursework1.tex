@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage{fontspec} % This line only for XeLaTeX and LuaLaTeX
 \setmainfont{Sabon LT Std} % text font Sabon
 \usepackage[OT1,euler-digits]{eulervm} % math font euler
@@ -44,22 +44,23 @@
 
 \vspace{0.3cm}
 
-\centerline{Carl Edward Rasmussen and David Scott Krueger} 
+\centerline{Carl Edward Rasmussen} 
 
 \vspace{0.2cm}
 
-\centerline{Due: 12:00 noon, Friday Nov 4th, 2022 online via moodle}
+\centerline{Due (for non-MLMI students) 12:00 noon, Friday Nov 8th, 2024 online via moodle}
 
 \vspace{2mm}
 
-Your answers should contain an explanation of what you do, and 2-4
-central commands to achieve it (but complete listings are
-unnecessary). You must also give an \emph{interpretation} of what the
+Your answers should contain an explanation of what you do, and max 2-4
+central commands to achieve it (but complete listings are unnecessary
+and discouraged). You must give an \emph{interpretation} of what the
 numerical values and graphs you provide \emph{mean} -- why are the
-results the way they are? {\bf Each question should be labelled and
-  answered separately and distinctly.} Total combined length of
-answers must not exceed $1000$ words; clearly indicate the actual total
-number of words in your coursework.
+results the way they are, and what are the consequences? Explain your
+reasoning. {\bf Each question should be labelled and answered
+  separately and distinctly.} Total combined length of answers must
+not exceed 5 sides of a4 (plus cover page), minimum 11pt font, 1 inch
+margins.
 
 You need the Gaussian Processes for Machine Learning (GPML) toolbox
 (version 4.2) for matlab and octave. Get the toolbox and walk through
@@ -77,30 +78,33 @@ approximately equal weight.
   squared exponential covariance function, \texttt{covSEiso}. Start
   the log hyper-parameters at \texttt{hyp.cov = [-1 0]; hyp.lik = 0;} and
   minimize the negative log marginal likelihood. Show the 95\%
-  predictive error bars. Comment on the predictive error bars and the
-  optimized hyperparameters.
+  predictive error bars. Explain the values of the optimized
+  hyperparameters and the shape of the predictive error bars.
 
-\item[b)] Show that by initializing the hyperparameters
-  differently, you can find a different local optimum for the
-  hyperparameters. Try a range of values. Show the fit. Explain what
-  the model is doing. Which fit is best, and why? How confident are
-  you about this and why?
+\item[b)] How can you find out whether the hyper parameter optimum is
+  unique, or whether there may be other local optima? If there are
+  local optima, find some, and explain what the model is doing in each
+  case. Which fit is best, and why? Quantify how confident are you about this and why?
 
 \item[c)] Train instead a GP with a periodic covariance
-  function. Show the fit. Comment on the behaviour of the error-bars,
-  compared to your fit from a). Do you think the data generating
-  mechanism (apart from the noise) was really strictly periodic? How
-  confident are you about this, and why?  Explain your reasoning.
-
+  function, \texttt{covPeriodic}. Compare the behaviour of the error-bars with a). Do you
+  think the data generating mechanism (apart from the noise) was
+  strictly periodic\footnote{By strictly periodic, is meant a
+    function where the exists a $p$ such that $f(x)=f(x+np)$ for
+    integer $n$ and all
+    $x$, not just a a function which ``goes up and down''.}? Carefully
+  discuss the evindence for or against periodicity.  
+  
 \item[d)] Generate random (essentially) noise free functions evaluated
   at \texttt{x = linspace(-5,5,200)';} from a GP with the following
   covariance function: \texttt{\{@covProd, \{@covPeriodic,
-    @covSEiso\}\}}, with covariance hyperparameters \texttt{hyp.cov =
-    [-0.5 0 0 2 0]}. In order to apply the Cholesky decomposition to
-  the covariance matrix, you may have to add a small diagonal matrix,
-  for example \texttt{1e-6*eye(200)}, why?  Plot some sample
-  functions. Explain the relationship between the properties of those
-  random functions and the form of the covariance function.
+    @covSEiso\}\}}, with covariance log hyperparameters
+  \texttt{hyp.cov = [-0.5 0 0 2 0]}. In order to apply the Cholesky
+  decomposition to the covariance matrix, you may have to add a small
+  diagonal matrix, for example \texttt{1e-6*eye(200)}, why?  Plot some
+  sample functions. Carefully explain the relationship between the
+  properties of those random functions and the form of the covariance
+  function.
 
 \item[e)] Load \texttt{cw1e.mat}. This data has 2-D input and
   scalar output. Visualise the data, for example using
@@ -112,10 +116,10 @@ approximately equal weight.
   hyperparameters (eg by using \texttt{hyp.cov =
     0.1*randn(6,1);}). 
 
-  Compare the models: How do the data fits compare? How do the
-  marginal likelihoods compare? Give a careful interpretation of the
-  relationship between data fit, marginal likelihood, and model
-  complexity for these two models.
+  Compare the models: give a careful quantitative interpretation of
+  the relationship between data fit, model complexity and marginal
+  likelihood for each of the two models; which model is best and why,
+  explain your reasoning.
 
 \end{enumerate}
 

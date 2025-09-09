@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage{fontspec} % This line only for XeLaTeX and LuaLaTeX
 \setmainfont{Sabon LT Std} % text font Sabon
 \usepackage[OT1,euler-digits]{eulervm} % math font euler
@@ -45,27 +45,26 @@
 
 \vspace{0.3cm}
 
-\centerline{Carl Edward Rasmussen and David Scott Krueger} 
+\centerline{Carl Edward Rasmussen \& Hong Ge} 
 
 \vspace{0.2cm}
 
-\centerline{Due: 12:00 noon, Dec 2nd, 2022 online via moodle}
+\centerline{Due (for non-MLMI students): 12:00 noon, Friday Dec 6th, 2024 online via moodle}
 
 \vspace{2mm}
 
 Your answers should contain an explanation of what you do, and 2-4
-central commands to achieve it (but complete listings are
-unnecessary). You must also give an \emph{interpretation} of what the
-numerical values and graphs you provide \emph{mean} -- why are the
+central commands to achieve it (but complete listings are unnecessary
+amd discouraged). You must also give an \emph{interpretation} of what
+the numerical values and graphs you provide \emph{mean} -- why are the
 results the way they are? {\bf Each question should be labelled and
   answered separately and distinctly.} Total combined length of
-answers must not exceed $1000$ words; clearly indicate the actual total
-number of words in your coursework. All questions carry approximately
-equal weight.
+answers must not exceed 5 sides of a4 (plus cover page), minimum 11pt
+font, 1 inch margins. All questions carry approximately equal weight.
 
 In this assignment, we will give you two short pieces of matlab or python code,
 which implement the main ingredients of Gibbs sampling for a Mixture
-of Multinomials \texttt{bmm} and for LDA \texttt{lda}. Before you
+of Multinomials: \texttt{bmm}, and for LDA: \texttt{lda}. Before you
 start answering questions, you should spend some time understanding in
 detail, what this code does. This will enable you to answer all the
 questions with very little programming effort on your part.
@@ -103,24 +102,18 @@ ID and word count. The words themselves are the variable \texttt{V}.
 \item[d)] The \texttt{bmm} script implements Gibbs sampling for a
   mixture of multinomials model. Use and modify the script to plot the
   evolution of the mixing proportions as a function of the number of
-  Gibbs sweeps up to 50 iterations. The mixing proportions are the
-  posterior probabilities of each of the mixture components. Explain
-  carefully, how would you determine whether the Gibbs sampler
-  converges to and explores the stationary distribution (the
-  posterior), does it?
- 
+  Gibbs sweeps. Give a detailed account of whether and when the Gibbs
+  sampler converges to the posterior distribution.
+
 \item[e)] Use and modify \texttt{lda}. Plot topic posteriors for
   $K=20$ as a function of the number of Gibbs sweeps, up to 50
   sweeps. Comment on these. Compute the perplexity for the documents
   in \texttt{B} for the state after 50 Gibbs sweeps, and compare to
   previously computed perplexities. Are 50 Gibbs sweeps adequate?
   Plot the word entropy (what units do you use?) for each of the
-  topics as a function of the number of Gibbs sweeps. Explain what you
-  see.
-
+  topics and explain the evolution as a function of the number of
+  Gibbs sweeps. Explain whether and why you think $K=20$ is appropriate for
+  this data set.
 \end{enumerate}
-
-Note that the performance and learning time for LDA depends a lot on
-the number of topics $K$.
 
 \end{document}

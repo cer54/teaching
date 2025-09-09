@@ -2,7 +2,7 @@
 
 \title{Posterior Gaussian Process}
 \author{Carl Edward Rasmussen}
-\date{October 13th, 2016}
+\date{October 17th, 2022}
 
 \begin{document}
 
@@ -46,34 +46,35 @@ Answer: in our non-parametric model, the ``parameters'' are the function itself!
 
 In our non-parametric model, the ``parameters'' are the function itself!
 
-Gaussian likelihood, with noise variance $\sigma_{\rm noise}^2$
+The joint distribution
 \[
-\Red{p({\bf y}|{\bf x}, f, \mathcal{M}_i)\;\sim\;
-{\cal N}({\bf f},\;\sigma^2_{\rm noise}I),}
+  \begin{split}
+    p(f,\bfy)\;&=\;\Blue{p(f)}\,\Red{p(\bfy|\bff)}\;=\;p(\bfy)\Green{p(f|\bfy)}\\
+    &\Longrightarrow\;\Blue{{\cal N}(f|m,\;k)}\,\Red{{\cal
+        N}(\bfy|\bff)}\;=\;
+    Z_{|\bfy}\Green{{\cal N}(f|m_{|\bfy},k_{|\bfy})}.
+    \end{split}
 \]
 
 Gaussian process prior with zero mean and covariance function $k$
 \[
-\Blue{p(f|\mathcal{M}_i)\;\sim\;{\cal GP}(m\equiv 0,\;k),}
+\Blue{p(f|\mathcal{M}_i)\;\sim\;{\cal N}(f|m\equiv 0,\;k),}
 \]
 
-Leads to a Gaussian process posterior
+Gaussian likelihood, with noise variance $\sigma_{\rm noise}^2$
 \[
-\begin{split}
-\Green{p(f}&\Green{|{\bf x},{\bf y}, \mathcal{M}_i)\;\sim\;{\cal
-    GP}(m_{\rm post},\;k_{\rm post}),}\\
-&\text{where}\left\{\begin{array}{l}\!\!\Green{m_{\rm post}(x)=k(x,{\bf x})[K({\bf x},{\bf x})+\sigma_{\rm noise}^2I]^{-1}{\bf y},}\\
-\Green{k_{\rm post}(x,x')=k(x,x')-k(x,{\bf x})[K({\bf x},{\bf x})+\sigma^2_{\rm noise}I]^{-1}k({\bf x},x'),}\end{array}\right.
-\end{split}
+\Red{p(\bfy|\bff, \mathcal{M}_i)\;\sim\;
+{\cal N}(\bff,\;\sigma^2_{\rm noise}I),}
 \]
 
-And a Gaussian predictive distribution:
+
+leads to a Gaussian process posterior
 \[
 \begin{split}
-p(y_*|x_*,{\bf x},{\bf y}, \mathcal{M}_i)\;\sim\;{\cal N}\big(&{\bf k}(x_*,{\bf x})^\top
-[K+\sigma_{\rm noise}^2I]^{-1}{ \bf y},\\
-&k(x_*,x_*)+\sigma_{\rm noise}^2-{\bf k}(x_*,{\bf x})^\top
-[K+\sigma_{\rm noise}^2I]^{-1}{\bf k}(x_*,{\bf x})\big).
+\Green{p(f}&\Green{|\bfy, \mathcal{M}_i)\;\sim\;{\cal
+  N}(f|m_{|\bfy},\;k_{|\bfy}),}\\
+&\text{where}\left\{\!\!\begin{array}{l}\Green{m_{|\bfy}(x)=k(x,\bfx)[K(\bfx,\bfx)+\sigma_{\rm noise}^2I]^{-1}\bfy,}\\
+\Green{k_{|\bfy}(x,x')=k(x,x')-k(x,\bfx)[K(\bfx,\bfx)+\sigma^2_{\rm noise}I]^{-1}k(\bfx,x').}\end{array}\right.
 \end{split}
 \]
 \end{frame}
@@ -91,10 +92,10 @@ p(y_*|x_*,{\bf x},{\bf y}, \mathcal{M}_i)\;\sim\;{\cal N}\big(&{\bf k}(x_*,{\bf 
 Predictive distribution:
 \[
 \begin{split}
-p(y_*|x_*,{\bf x},{\bf y})\;\sim\;{\cal N}\big(&{\bf k}(x_*,{\bf x})^\top
-[K+\sigma_{\rm noise}^2I]^{-1}{ \bf y},\\
-&k(x_*,x_*)+\sigma_{\rm noise}^2 - {\bf k}(x_*,{\bf x})^\top 
-[K+\sigma_{\rm noise}^2I]^{-1}{\bf k}(x_*,{\bf x})\big)
+p(y_*|x_*,\bfx,\bfy)\;\sim\;{\cal N}\big(&\bfk(x_*,\bfx)^\top
+[K+\sigma_{\rm noise}^2I]^{-1}\bfy,\\
+&k(x_*,x_*)+\sigma_{\rm noise}^2 - \bfk(x_*,\bfx)^\top 
+[K+\sigma_{\rm noise}^2I]^{-1}\bfk(x_*,\bfx)\big)
 \end{split}
 \]
 \end{frame}
@@ -112,7 +113,7 @@ f_*|x_*,\bfx,{\bf y}\;\sim\; {\cal N}\big(&\Blue{K(x_*,\bfx)
 \]
 The \Blue{mean} is linear in two ways:
 \[
-\mu(x_*)\;=\;\Blue{k(x_*,\bfx)[K(\bfx,\bfx)+\sigma_\mathrm{noise}^2I]^{-1}{\bf y}}
+\mu(x_*)\;=\;\Blue{k(x_*,\bfx)[K(\bfx,\bfx)+\sigma_\mathrm{noise}^2I]^{-1}\bfy}
 \;=\;\sum_{n=1}^N\beta_n y_n\;=\;
 \sum_{n=1}^N\alpha_nk(x_*,x_n).
 \]

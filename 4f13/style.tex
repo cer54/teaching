@@ -2,11 +2,17 @@
 \usefonttheme{professionalfonts,serif}
 \def\newblock{\hskip .11em plus .33em minus .07em}
 \usepackage[numbers,sort]{natbib}
-\renewcommand{\rmdefault}{psbx}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+
+\usepackage{fontspec} % This line only for XeLaTeX and LuaLaTeX
+\setmainfont{Sabon LT Std} % text font Sabon
+\usepackage[OT1,euler-digits]{eulervm} % math font euler
+
+%\renewcommand{\rmdefault}{psbx}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
 \usepackage{textcomp}
-\usepackage{eulervm}
+%\usepackage{eulervm}
+\usepackage{bm}
 
 \usetheme{default}           % tips from David Blei
 \useinnertheme{circles}
@@ -62,21 +68,22 @@
 \newcommand{\deldel}[2]{\frac{\partial #1}{\partial #2}}
 
 \newcommand{\maketilde}{\raisebox{0.4ex}{\tiny $\sim$}}
-\newcommand{\bfa}{\mathbf a}
-\newcommand{\bfb}{\mathbf b}
-\newcommand{\bfe}{\mathbf e}
-\newcommand{\bff}{\mathbf f}
-\newcommand{\bfk}{\mathbf k}
-\newcommand{\bfm}{\mathbf m}
-\newcommand{\bfn}{\mathbf n}
-\newcommand{\bfp}{\mathbf{p}}
-\newcommand{\bfs}{\mathbf s}
-\newcommand{\bfu}{\mathbf u}
-\newcommand{\bfx}{\mathbf x}
-\newcommand{\bfy}{\mathbf y}
-\newcommand{\bft}{\mathbf t}
-\newcommand{\bfv}{\mathbf v}
-\newcommand{\bfw}{\mathbf w}
-\newcommand{\bfA}{\mathbf A}
-\newcommand{\bfI}{\mathbf I}
-\newcommand{\bfK}{\mathbf K}
+\newcommand{\bfa}{\bm a}
+\newcommand{\bfb}{\bm b}
+\newcommand{\bfe}{\bm e}
+\newcommand{\bff}{\bm f}
+\newcommand{\bfk}{\bm k}
+\newcommand{\bfm}{\bm m}
+\newcommand{\bfn}{\bm n}
+\newcommand{\bfp}{\bm p}
+\newcommand{\bfs}{\bm s}
+\newcommand{\bfu}{\bm u}
+\newcommand{\bfx}{\bm x}
+\newcommand{\bfy}{\bm y}
+\newcommand{\bft}{\bm t}
+\newcommand{\bfv}{\bm v}
+\newcommand{\bfw}{\bm w}
+\newcommand{\bfz}{\bm z}
+\newcommand{\bfA}{\bm A}
+\newcommand{\bfI}{\bm I}
+\newcommand{\bfK}{\bm K}
